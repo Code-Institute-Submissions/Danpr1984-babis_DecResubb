@@ -43,3 +43,13 @@ class Comment(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)     
+
+
+class Profile(models.Model):
+    child_name = models.CharField(max_length=200, unique=True) 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    child_image = CloudinaryField('image', default='placeholder') 
+    birthdate = models.DateField()
+        
+    def __str__(self):
+        return self.title        
