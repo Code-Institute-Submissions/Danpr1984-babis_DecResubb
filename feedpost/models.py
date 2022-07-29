@@ -4,6 +4,18 @@ from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
+
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    id_user = models.IntegerField()
+    bio = models.TextField(blank=True)
+    profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')
+    location = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+        
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile_post')
