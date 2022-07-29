@@ -1,21 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from cloudinary.models import CloudinaryField
+from datetime import datetime
 
-
-# Create your models here.
 
 class Profile(models.Model):
+    child_name = models.CharField(max_length=200, unique=True) 
+    id_child = models.IntegerField(default=None)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    id_user = models.IntegerField()
-    bio = models.TextField(blank=True)
-    profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')
-    location = models.CharField(max_length=100, blank=True)
-
+    profile_image = CloudinaryField('image', default='placeholder') 
+    birthdate = models.DateField()
+        
     def __str__(self):
         return self.user.username
 
-        
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile_post')
@@ -57,11 +56,3 @@ class Comment(models.Model):
         super().save(*args, **kwargs)     
 
 
-class Profile(models.Model):
-    child_name = models.CharField(max_length=200, unique=True) 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    child_image = CloudinaryField('image', default='placeholder') 
-    birthdate = models.DateField()
-        
-    def __str__(self):
-        return self.title        
