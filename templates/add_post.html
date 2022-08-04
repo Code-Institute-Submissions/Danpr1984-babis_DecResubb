@@ -2,5 +2,12 @@
 {% load static %}
 
 {% block content %}
+<div id="overlay">
 <h1>Create a Post</h1>
+<br/><br/>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Post</button>
+</div>
 {% endblock content %}

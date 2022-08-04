@@ -1,14 +1,20 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.shortcuts import reverse
+from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
 from cloudinary.models import CloudinaryField
 from datetime import datetime
 
 
+
+class CustomUser(AbstractUser):
+    is_parent = models.BooleanField(default = True)
+    is_guest = models.BooleanField(default = False)
+
 class Profile(models.Model):
     child_name = models.CharField(max_length=200, unique=True) 
     id_child = models.IntegerField(default=None)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     profile_image = CloudinaryField('image', default='placeholder') 
     birthdate = models.DateField()
         
@@ -17,7 +23,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile_post')
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='profile_post')
     #profile = models.ForeignKey(Child, on_delete=models.CASCADE, related_name="child_profile")
     content = models.TextField()
     featured_image = CloudinaryField('image', default='placeholder')
@@ -25,7 +31,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
-    likes = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_likes')
+    likes = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='post_likes', default=None)
 
     class Meta:
         verbose_name_plural = "Posts"
@@ -35,11 +41,14 @@ class Post(models.Model):
         return self.title
 
     def number_of_likes(self):
-        return self.likes.count()    
+        return self.likes.count()   
+
+    def get_absolute_url(self):
+        return reverse('profile')
 
 
 class Comment(models.Model):
-    comment_sender = models.ForeignKey(User, on_delete= models.CASCADE)
+    comment_sender = models.ForeignKey(CustomUser, on_delete= models.CASCADE)
     post = models.ForeignKey(Post, on_delete= models.CASCADE)
     comment = models.TextField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -54,5 +63,4 @@ class Comment(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)     
-
 
