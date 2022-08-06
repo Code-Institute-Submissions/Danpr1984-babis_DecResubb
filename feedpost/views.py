@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, View
 from .models import Post
+from cloudinary.models import CloudinaryField
 
 
 class PostList(ListView):
@@ -13,6 +14,7 @@ class PostList(ListView):
 class AddPostView(CreateView):
     model = Post
     template_name = 'add_post.html'
+    #post to cloudinary
     fields = '__all__'
 
 
@@ -37,14 +39,3 @@ def add_post(request):
         else:
             print(form.errors)
             return render(request, 'add_post.html', {'form': form})
-
-def sign_up(request):
-    """Sign Up"""
-    if request.method == "POST":
-        form = Customer(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, 'index.html')
-    else:
-        form = Customer() 
-    return render(request, 'signup.html', {'form': form})

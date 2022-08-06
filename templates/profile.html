@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 <main class="flex-shrink-0 main-bg">
     {% block content %}
     <header>
@@ -22,8 +23,7 @@
     
         <!-- Jumbotron -->
         <div id="intro" class="p-5 text-center bg-light">
-          <h1 class="mb-3 h2">Learn Bootstrap 5 with MDB</h1>
-          <p class="mb-3">Best & free guide of responsive web design</p>
+          
           <a class="btn btn-primary m-12" href="{% url 'add_post'%}" role="button" rel="nofollow" onclick='overlay()'
             >Post a ***BABYNAME*** moment</a>
           <a class="btn btn-primary m-2" href="" target="_blank"
@@ -45,13 +45,9 @@
               <div class="mx-auto col-md-6 mb-4">
                 <div class="card">
                   <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                   {% if "placeholder" in post.featured_image.url %}
-                    <img src="/static/images/theo_for_babis.jpeg" class="img-fluid" />
-                    {% else %}
                     <img class="card-img-top" src=" {{ post.featured_image.url }}">
                     <h5 class="card-title secondary_font">{{ post.title }}</h5>
                     <p class="card-text secondary_font">{{ post.content }}</p>
-                    
                   </div>
                 </div>
               </div>
@@ -61,7 +57,7 @@
                 </p>
                 <a href="#!" class="btn btn-primary">Comment</a>
               </div>
-              {% endif %}
+              
               {% endfor%}
             </div>
             <!--<div id="overlay">
