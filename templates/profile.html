@@ -49,6 +49,9 @@
                     <img src="/static/images/theo_for_babis.jpeg" class="img-fluid" />
                     {% else %}
                     <img class="card-img-top" src=" {{ post.featured_image.url }}">
+                    <h5 class="card-title secondary_font">{{ post.title }}</h5>
+                    <p class="card-text secondary_font">{{ post.content }}</p>
+                    
                   </div>
                 </div>
               </div>
