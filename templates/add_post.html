@@ -1,15 +1,20 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 {% load static %}
+
+
 
 {% block content %}
 <div id="overlay">
 <h1>Create a Post</h1>
 <br/><br/>
-<form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data">
 
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button>Post</button>
+        {% csrf_token %}
+        {% crispy form %}   
+    <button type="submit">Post</button>
+
+    </form>
 </div>
-</form>
 {% endblock content %}

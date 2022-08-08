@@ -26,8 +26,8 @@
           
           <a class="btn btn-primary m-12" href="{% url 'add_post'%}" role="button" rel="nofollow" onclick='overlay()'
             >Post a ***BABYNAME*** moment</a>
-          <a class="btn btn-primary m-2" href="" target="_blank"
-            role="button">Download MDB UI KIT</a>
+          <!--<a class="btn btn-primary m-2" href="" target="_blank"
+            role="button">Download MDB UI KIT</a>-->
         </div>
         <!-- Jumbotron -->
       </header>
@@ -46,15 +46,13 @@
                 <div class="card">
                   <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                     <img class="card-img-top" src=" {{ post.featured_image.url }}">
+                    <p class="card-text secondary_font">{{ post.author }}</p>
                     <h5 class="card-title secondary_font">{{ post.title }}</h5>
                     <p class="card-text secondary_font">{{ post.content }}</p>
                   </div>
                 </div>
               </div>
               <div class="card-body">
-                <p class="card-text">
-                  Theo de paseo
-                </p>
                 <a href="#!" class="btn btn-primary">Comment</a>
               </div>
               

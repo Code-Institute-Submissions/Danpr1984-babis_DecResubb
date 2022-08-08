@@ -11,10 +11,29 @@ class CustomUser(AbstractUser):
     is_parent = models.BooleanField(default = True)
     is_guest = models.BooleanField(default = False)
 
+    def add_user(self):
+        return self.save()
+
+    def get_absolute_url(self):
+        if self.is_parent:
+            return reverse('profile')    
+        else: 
+            return reverse('add_post')
+
+class ParentProfile(models.Model):
+    parent_name = models.CharField(max_length=200, unique=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    profile_image = CloudinaryField('image', default='placeholder')
+
+class GuestProfile(models.Model):
+    guest_name = models.CharField(max_length=200, unique=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    profile_image = CloudinaryField('image', default='placeholder')    
+
 class Profile(models.Model):
     child_name = models.CharField(max_length=200, unique=True) 
     id_child = models.IntegerField(default=None)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(ParentProfile, on_delete=models.CASCADE)
     profile_image = CloudinaryField('image', default='placeholder') 
     birthdate = models.DateField()
         
