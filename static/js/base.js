@@ -1,4 +1,6 @@
-function overlay() {
-	el = document.getElementById("overlay");
-	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-}
+const myModal = document.getElementById('exampleModal')
+const myInput = document.getElementById('exampleModalLabel')
+
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})

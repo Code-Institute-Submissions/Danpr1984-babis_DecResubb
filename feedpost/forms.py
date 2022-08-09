@@ -1,5 +1,5 @@
 from django import forms
-from .models import CustomUser, Post
+from .models import CustomUser, Post, ParentProfile, GuestProfile, Profile
 from django.contrib.auth.forms import UserCreationForm
 #class RegistrationForm(forms.ModelForm):
 
@@ -33,4 +33,20 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = '__all__'
             
-        
+class ParentForm(forms.ModelForm):   
+
+    class Meta:
+        model = ParentProfile
+        fields = '__all__'
+
+class GuestForm(forms.ModelForm):   
+
+    class Meta:
+        model = GuestProfile
+        fields = '__all__'
+
+class ChildForm(forms.ModelForm):   
+
+    class Meta:
+        model = Profile
+        fields = '__all__'

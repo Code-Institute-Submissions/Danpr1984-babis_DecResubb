@@ -1,8 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 <main class="flex-shrink-0 main-bg">
+
     {% block content %}
-   JOIN AS A GUEST
+    <div id="overlay">
+        <h1>Guest Profile</h1>
+    <br/><br/>
+        <form method="POST" enctype="multipart/form-data">
+    
+            {% csrf_token %}
+            {{ form.as_p }}
+        <button type="submit">Create</button>
+    
+        </form>
+    </div>
     {% endblock content %}
 </main>

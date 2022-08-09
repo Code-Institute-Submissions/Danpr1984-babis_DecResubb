@@ -16,19 +16,26 @@ class CustomUser(AbstractUser):
 
     def get_absolute_url(self):
         if self.is_parent:
-            return reverse('profile')    
+            return reverse('parent')    
         else: 
-            return reverse('add_post')
+            return reverse('guest')
 
 class ParentProfile(models.Model):
     parent_name = models.CharField(max_length=200, unique=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     profile_image = CloudinaryField('image', default='placeholder')
 
+    def get_absolute_url(self):
+        return reverse('add_child')
+
 class GuestProfile(models.Model):
     guest_name = models.CharField(max_length=200, unique=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     profile_image = CloudinaryField('image', default='placeholder')    
+
+    def get_absolute_url(self):
+        return reverse('access_profile')
+
 
 class Profile(models.Model):
     child_name = models.CharField(max_length=200, unique=True) 
@@ -39,6 +46,10 @@ class Profile(models.Model):
         
     def __str__(self):
         return self.user.username
+
+    def get_absolute_url(self):
+        return reverse('profile')
+    
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
