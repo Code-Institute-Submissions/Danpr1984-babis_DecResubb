@@ -8,5 +8,5 @@ urlpatterns = [
     path('guest', views.AddGuest.as_view(), name='guest'),
     path('profile', views.PostList.as_view(), name='profile'),
     path('add_post/', views.AddPostView.as_view(), name='add_post'),
-    path('register/', views.NewUser.as_view(), name='register'),
+    path('', views.NewUser.as_view(), name='register'),
 ]

@@ -8,7 +8,7 @@ class RegisterForm(UserCreationForm):
     
     class Meta:
         model = CustomUser
-        fields = ["is_guest", "is_parent", "username", "password1"]
+        fields = ["is_guest", "is_parent", "username", "password1", "email"]
 
 class PostForm(forms.ModelForm):
 

@@ -19,13 +19,44 @@
           }
         </style>
     
-       
+    
+    
+ 
     
         <!-- Jumbotron -->
         <div id="intro" class="p-5 text-center bg-light">
           
-          <a class="btn btn-primary m-12" href="{% url 'add_post'%}" role="button" rel="nofollow" onclick='overlay()'
-            >Post a ***BABYNAME*** moment</a>
+          <a class="btn btn-primary m-12" data-bs-toggle="modal" data-bs-target="#postModal">
+            Post a ***BABYNAME*** moment</a>
+            <!--{%jinja% if is_parent}--> 
+              <a class="btn btn-primary m-12" href="" role="button" rel="nofollow" 
+              >Add Child Profile</a>  
+              <a class="btn btn-primary m-12" href="" role="button" rel="nofollow" 
+              >Invite Guest</a>  
+           
+           
+            <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="postModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <form method="POST" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          {{ form.as_p }}
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Create Post</button>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                    
+                    
+                  </div>
+                </div>
+              </div>
+          </div>  
           <!--<a class="btn btn-primary m-2" href="" target="_blank"
             role="button">Download MDB UI KIT</a>-->
         </div>
@@ -49,6 +80,7 @@
                     <p class="card-text secondary_font">{{ post.author }}</p>
                     <h5 class="card-title secondary_font">{{ post.title }}</h5>
                     <p class="card-text secondary_font">{{ post.content }}</p>
+                    <p>HOLA</p>
                   </div>
                 </div>
               </div>
@@ -58,36 +90,9 @@
               
               {% endfor%}
             </div>
-            <!--<div id="overlay">
-              <h1>Create a Post</h1>
-              <br/><br/>
-              <form method="POST">
-                  {% csrf_token %}
-                  {{ form.as_p }}
-                  <button>Post</button>
-              </form>    
-            </div>-->
+            
           </section>
-          <!--Section: Content
-    
-          Pagination
-          <nav class="my-4" aria-label="...">
-            <ul class="pagination pagination-circle justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        -->
+       
       </main>
       <!--Main layout-->
     

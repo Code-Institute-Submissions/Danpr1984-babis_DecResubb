@@ -10,10 +10,11 @@ class PostList(ListView):
     model = Post
     queryset = Post.objects.order_by('created_at')
     template_name = 'profile.html'
+    form_class = PostForm
 
 class AddPostView(CreateView):
     model = Post
-    template_name = 'add_post.html'
+    template_name = 'profile.html'
     form_class = PostForm
 
 class NewUser(CreateView):
@@ -21,10 +22,11 @@ class NewUser(CreateView):
     template_name = 'home.html'
     form_class = RegisterForm
 
-class HomeView(View):
-
-    def get(self, request):
-        return render(request, "home.html")
+class HomeView(CreateView):
+    model = CustomUser
+    template_name = 'home.html'
+    form_class = RegisterForm
+   
         
 class AddParent(CreateView):
     model = ParentProfile
