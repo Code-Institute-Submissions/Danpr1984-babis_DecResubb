@@ -8,8 +8,8 @@ from datetime import datetime
 
 
 class CustomUser(AbstractUser):
-    is_parent = models.BooleanField(default = True)
-    is_guest = models.BooleanField(default = False)
+    is_parent = models.BooleanField(default=True)
+    is_guest = models.BooleanField(default=False)
 
     def add_user(self):
         return self.save()

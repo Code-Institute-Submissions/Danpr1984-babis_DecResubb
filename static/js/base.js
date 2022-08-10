@@ -5,9 +5,13 @@ myModal.addEventListener('shown.bs.modal', () => {
   myInput.focus()
 })
 
-const postModal = document.getElementById('postModal')
-const postInput = document.getElementById('postModalLabel')
+const myModal = document.getElementById('postModal')
+myModal.addEventListener('postModalLabel')
 
 postModal.addEventListener('shown.bs.modal', () => {
   postInput.focus()
 })
+
+('myModal')
+const myInput = document.getElementById('myInput')
+
