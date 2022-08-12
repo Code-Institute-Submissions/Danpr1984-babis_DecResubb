@@ -6,19 +6,20 @@ from cloudinary.models import CloudinaryField
 from datetime import datetime
 
 
-
 class CustomUser(AbstractUser):
     is_parent = models.BooleanField(default=True)
     is_guest = models.BooleanField(default=False)
 
     def add_user(self):
         return self.save()
+    
 
     def get_absolute_url(self):
         if self.is_parent:
             return reverse('parent')    
         else: 
             return reverse('guest')
+
 
 class ParentProfile(models.Model):
     parent_name = models.CharField(max_length=200, unique=True)
@@ -27,6 +28,9 @@ class ParentProfile(models.Model):
 
     def get_absolute_url(self):
         return reverse('add_child')
+
+    def __str__(self):
+        return self.parent_name        
 
 class GuestProfile(models.Model):
     guest_name = models.CharField(max_length=200, unique=True)
@@ -43,13 +47,12 @@ class Profile(models.Model):
     user = models.ForeignKey(ParentProfile, on_delete=models.CASCADE)
     profile_image = CloudinaryField('image', default='placeholder') 
     birthdate = models.DateField()
-        
-    def __str__(self):
-        return self.user.username
-
+    
     def get_absolute_url(self):
         return reverse('profile')
-    
+
+    def __str__(self):
+        return self.child_name
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -79,7 +82,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     comment_sender = models.ForeignKey(CustomUser, on_delete= models.CASCADE)
-    post = models.ForeignKey(Post, on_delete= models.CASCADE)
+    post = models.ForeignKey(Post, on_delete = models.CASCADE)
     comment = models.TextField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     edited_on = models.DateTimeField(auto_now_add=True)

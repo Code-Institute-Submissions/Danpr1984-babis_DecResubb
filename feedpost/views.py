@@ -14,7 +14,7 @@ class PostList(ListView):
 
 class AddPostView(CreateView):
     model = Post
-    template_name = 'profile.html'
+    template_name = 'add_post.html'
     form_class = PostForm
 
 class NewUser(CreateView):

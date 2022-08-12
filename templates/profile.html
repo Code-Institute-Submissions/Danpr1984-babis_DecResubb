@@ -21,11 +21,11 @@
     
         <!-- Jumbotron -->
         <div id="intro" class="p-5 text-center bg-light">
-          
-          <a class="btn btn-primary m-12" data-bs-toggle="modal" data-bs-target="#postModal">
-            Post a ***BABYNAME*** moment</a>
+          <a class="btn btn-primary m-12" href="add_post">Post a ***BABYNAME*** moment</a>
+          <!--<a class="btn btn-primary m-12" data-bs-toggle="modal" data-bs-target="#postModal">
+            Post a ***BABYNAME*** moment</a>-->
             {% if request.user.is_parent %}
-              <a class="btn btn-primary m-12" href="" role="button" rel="nofollow">Add Child Profile</a>  
+              <a class="btn btn-primary m-12" href="add_child" role="button" rel="nofollow">Add Child Profile</a>  
               <a class="btn btn-primary m-12" href="" role="button" rel="nofollow" >Invite Guest</a> 
             {% endif %} 
             <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
