@@ -158,8 +158,8 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-ACCOUNT_FORMS = {
-    'signup': 'feedpost.forms.RegisterForm',
-}
+#ACCOUNT_FORMS = {
+ #   'signup': 'feedpost.forms.RegisterForm',
+#}
 
 CRISPY_FAIL_SILENTLY = not DEBUG

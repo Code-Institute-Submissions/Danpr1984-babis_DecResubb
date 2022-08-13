@@ -30,7 +30,8 @@ class ParentProfile(models.Model):
         return reverse('add_child')
 
     def __str__(self):
-        return self.parent_name        
+        return self.parent_name
+     
 
 class GuestProfile(models.Model):
     guest_name = models.CharField(max_length=200, unique=True)
