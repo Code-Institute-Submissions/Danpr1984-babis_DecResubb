@@ -2,38 +2,70 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-    <main class="flex-shrink-0 main-bg">
+    
+<header>
+  <div class="container">
+    <div id="navbar-container"></div>
+  </div>
+</header>
 
+
+
+ <!-------------------------SEPARATE-->
         {% block content %}
-
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Register
-          </button>
-          <a style = "width:85px ; color:white"  class="nav-link btn btn-primary"  href="{% url 'account_login'%}">Login</a>
-          
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                  
-                  
-                </div>
+        <section style="background-image:url('https://i.pinimg.com/originals/12/10/6e/12106e3e9a806affae8bb4a63887fd9d.gif');height: 700px; background-size:cover ; background-repeat: no-repeat">
+          <div class="card">
+            <div class="card-body font_italic"  style="width:50%; background-color:rgba(237, 237, 240, 0.2);">
+              <h3>Start sharing moments of your little ones with your loved ones</h3>
+            </div>
+          </div>
+        </section>
+        
+      
+              <!--<img src="https://i.pinimg.com/originals/12/10/6e/12106e3e9a806affae8bb4a63887fd9d.gif" class="card-img-top" alt="...">-->
+              
+              
+                
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Register
+                </button>
+                <a style = "width:85px ; color:white"  class="nav-link btn btn-primary"  href="{% url 'account_login'%}">Login</a>
+              
+          <!--<div class="banner">-->
+           
+            
+          <!--</div>-->
+          </div>
+      </section>
+       <!-- end of section homepage  -->
+      
+      <!-- section about--> 
+      <section class="about-section my-5">
+          <div class="container">
+               <h1 class="text-center mb-3">About Us</h1>
+          <hr class="mb-5">
+            <div class="row">
+              <div class="col-md-4 mx-auto">
+                <img src="" class="img-fluid" alt="" />
+              </div>
+              <div class="col-md-4 mx-auto">
+                <p>"Life can be challenging sometimes. We go through ups and downs mentally and physically. 
+                    The reality is that you are not alone, 
+                    thousands of people feel lonely, anxious, sad, or too tired every day. 
+                </p> 
+                <p>
+                  Here at BetaMind you will enter a space created to help you feel better about yourself, to feel understood and to meet
+                  others who are willing to listen to you, share their stories, cheer you up and why not, have a laugh.
+                  Check our feel-good content and connect with people that just like you, 
+                  are seeking for some company and to get some peace of mind."
+              </p> 
               </div>
             </div>
-        </div>
+          </div>
+        </section>
+          
+        <!-------------------------SEPARATE-->
+        
         {% endblock content %}
-    </main>
+
     

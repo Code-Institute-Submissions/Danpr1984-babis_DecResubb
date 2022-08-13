@@ -28,16 +28,19 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">babis</span></a>
+          <a class="navbar-brand primary_font large_text light_font white_font" href="{% url 'home' %}">
+            <img src="https://img.freepik.com/premium-vector/cute-baby-elephant-with-moon-stars-vector-illustration_159446-654.jpg?w=740" width="60"> Babis
+        </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarText">
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
+                    
                     {% if user.is_authenticated%}
                     <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Profile</a>
@@ -46,10 +49,17 @@
                         <a class="nav-link" href="{% url 'account_logout'%}">Logout</a>
                     </li>
                     {% else %}
+
+                    <li class="nav-item">
+                      <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Register
+                      </a>
+                    </li>
                     
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_login'%}">Login</a>
                     </li>
+                    
                     
                     {% endif %}
                 </ul>
@@ -98,6 +108,28 @@
         <!-- Copyright -->
       </footer>
       <!--Footer-->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+              
+              
+            </div>
+          </div>
+        </div>
+    </div>
      
 </body>
 
