@@ -5,9 +5,9 @@
 <main class="flex-shrink-0 main-bg">
 
     {% block content %}
-    <div id="overlay">
+    <div class="form-group d-flex align-items-center justify-content-center" style="height:550px">
         <h1>Guest Profile</h1>
-    <br/><br/>
+    
         <form method="POST" enctype="multipart/form-data">
     
             {% csrf_token %}

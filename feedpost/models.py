@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
 from cloudinary.models import CloudinaryField
 from datetime import datetime
+from django.dispatch import receiver
 
 
 class CustomUser(AbstractUser):
@@ -36,10 +37,14 @@ class ParentProfile(models.Model):
 class GuestProfile(models.Model):
     guest_name = models.CharField(max_length=200, unique=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    profile_image = CloudinaryField('image', default='placeholder')    
+    profile_image = CloudinaryField('image', default='placeholder') 
+    
 
     def get_absolute_url(self):
-        return reverse('access_profile')
+        return reverse('profile')
+
+    def __str__(self):
+        return self.guest_name    
 
 
 class Profile(models.Model):
@@ -48,16 +53,39 @@ class Profile(models.Model):
     user = models.ForeignKey(ParentProfile, on_delete=models.CASCADE)
     profile_image = CloudinaryField('image', default='placeholder') 
     birthdate = models.DateField()
+    friends = models.ManyToManyField(CustomUser, related_name='friends', blank=True)
     
+    def get_friends(self):
+        return self.friends.all()
+
+    def get_friends_no(self):
+        return self.friends.all().count()    
+
     def get_absolute_url(self):
         return reverse('profile')
 
     def __str__(self):
         return self.child_name
 
+STATUS_CHOICES = (
+    ('send', 'send'),
+    ('accepted', 'accepted'),
+)
+
+class Relationship(models.Model):
+    sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name = 'sender')
+    receiver = models.ForeignKey(GuestProfile, on_delete=models.CASCADE, related_name = 'receiver')
+    status = models.CharField (max_length=8, choices=STATUS_CHOICES)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.sender}-{self.receiver}-{self.status}"
+
+
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='profile_post')
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True) 
     #profile = models.ForeignKey(Child, on_delete=models.CASCADE, related_name="child_profile")
     content = models.TextField()
     featured_image = CloudinaryField('image', default='placeholder')
@@ -65,7 +93,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
-    likes = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='post_likes', default=None)
+    likes = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='likes', default=None)
 
     class Meta:
         verbose_name_plural = "Posts"
@@ -82,19 +110,31 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    comment_sender = models.ForeignKey(CustomUser, on_delete= models.CASCADE)
-    post = models.ForeignKey(Post, on_delete = models.CASCADE)
-    comment = models.TextField(null=True, blank=True)
+    name = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+    body = models.TextField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     edited_on = models.DateTimeField(auto_now_add=True)
     deleted_on = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='+')
 
-    class Meta:
-        ordering = ['created_on']
 
-    def __str__(self):
-        return self.pk   
+    @property
+    def children(self):
+ 		    return Comment.objects.filter(parent=self).order_by('-created_on').all()
+    
+    @property
+    def is_parent(self):
+ 		    if self.parent is None:
+ 			        return True
+ 		    return False
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)     
+    #class Meta:
+     #   ordering = ['created_on']
+
+    #def save(self, *args, **kwargs):
+     #   super().save(*args, **kwargs)     
+    
+    #def __str__(self):
+     #   return '%s - %s' %(self.post.title, self.name)
 

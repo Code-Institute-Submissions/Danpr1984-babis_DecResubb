@@ -1,5 +1,5 @@
 from django import forms
-from .models import CustomUser, Post, ParentProfile, GuestProfile, Profile
+from .models import CustomUser, Post, ParentProfile, GuestProfile, Profile, Comment
 from django.contrib.auth.forms import UserCreationForm
 #class RegistrationForm(forms.ModelForm):
 
@@ -32,12 +32,36 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = '__all__'
+        exclude = ('author',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
+        super(PostForm, self).__init__(*args, **kwargs) 
+
+    def save(self, commit=True):
+        obj = super(PostForm, self).save(commit=False)
+        user = None
+        if self.request:
+            if hasattr(self.request, "user"):
+                # Almacenar el usuario
+                user = self.request.user
+        if commit:
+            ### Almacenar el usuario en host
+            obj.author = user
+            obj.save()
+        return obj       
             
 class ParentForm(forms.ModelForm):   
 
     class Meta:
         model = ParentProfile
         fields = '__all__'
+
+        widget = {
+            'parent_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'user': forms.TextInput(attrs={'class': 'form-control'}),
+            'profile_image': forms.ImageField(),
+        }
 
 class GuestForm(forms.ModelForm):   
 
@@ -50,3 +74,17 @@ class ChildForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = '__all__'
+        
+
+
+class CommentForm(forms.ModelForm):
+    comment = forms.CharField(
+        label='',
+        widget=forms.Textarea(attrs={
+            'rows': '3',
+            'placeholder': 'Say Something...'
+            }))
+
+    class Meta:
+        model = Comment
+        fields = ['body']

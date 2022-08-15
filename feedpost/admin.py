@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import Post, Profile
+from .models import Post, Profile, CustomUser, Relationship, ParentProfile, GuestProfile, Comment
 from django_summernote.admin import SummernoteModelAdmin
 from django.contrib import admin
-from .models import CustomUser
 from django.contrib.auth.forms import UserCreationForm
 from .forms import PostForm
 from django.contrib.auth.admin import UserAdmin
@@ -32,7 +31,10 @@ class PostAdmin(SummernoteModelAdmin):
     summernote_fields = ('content',)
 
 admin.site.register(Profile)
-
+admin.site.register(GuestProfile)
+admin.site.register(ParentProfile)
+admin.site.register(Relationship)
+admin.site.register(Comment)
 
 
 
