@@ -30,11 +30,12 @@ class PostAdmin(SummernoteModelAdmin):
     search_fields = ['title', 'content']
     summernote_fields = ('content',)
 
+admin.site.register(Comment)
 admin.site.register(Profile)
 admin.site.register(GuestProfile)
 admin.site.register(ParentProfile)
 admin.site.register(Relationship)
-admin.site.register(Comment)
+
 
 
 

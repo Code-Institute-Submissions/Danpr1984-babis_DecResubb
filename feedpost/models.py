@@ -116,25 +116,14 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     edited_on = models.DateTimeField(auto_now_add=True)
     deleted_on = models.DateTimeField(auto_now_add=True)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='+')
-
-
-    @property
-    def children(self):
- 		    return Comment.objects.filter(parent=self).order_by('-created_on').all()
     
-    @property
-    def is_parent(self):
- 		    if self.parent is None:
- 			        return True
- 		    return False
-
-    #class Meta:
-     #   ordering = ['created_on']
-
-    #def save(self, *args, **kwargs):
-     #   super().save(*args, **kwargs)     
     
-    #def __str__(self):
-     #   return '%s - %s' %(self.post.title, self.name)
+    class Meta:
+        ordering = ['created_on']
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)     
+    
+    def __str__(self):
+        return '%s - %s' %(self.post.title, self.name)
 
