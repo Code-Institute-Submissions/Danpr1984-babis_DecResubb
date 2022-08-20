@@ -107,23 +107,39 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('profile')
+    
+        
 
 
+#class Comment(models.Model):
+ #   name = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+  ###created_on = models.DateTimeField(auto_now_add=True)
+    #edited_on = models.DateTimeField(auto_now_add=True)
+    #deleted_on = models.DateTimeField(auto_now_add=True)
+    
+    
+    #class Meta:
+     #   ordering = ['created_on']
+
+    #def save(self, *args, **kwargs):
+    #    super().save(*args, **kwargs)     
+    
+    #def __str__(self):
+     #   return '%s - %s' %(self.post.title, self.name)
+     
 class Comment(models.Model):
-    name = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
-    body = models.TextField(null=True, blank=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField(CustomUser, max_length=200, default="name")
+    text = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    edited_on = models.DateTimeField(auto_now_add=True)
-    deleted_on = models.DateTimeField(auto_now_add=True)
     
-    
+
     class Meta:
         ordering = ['created_on']
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)     
-    
     def __str__(self):
-        return '%s - %s' %(self.post.title, self.name)
+        return self.text
+
+    def get_absolute_url(self):
+        return reverse('profile') #kwargs={'pk': self.pk})     
 

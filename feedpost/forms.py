@@ -78,13 +78,18 @@ class ChildForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    comment = forms.CharField(
-        label='',
+    model = Comment
+    text = forms.CharField(
+        required=False,
         widget=forms.Textarea(attrs={
-            'rows': '3',
-            'placeholder': 'Say Something...'
-            }))
+            'width':'60%',
+            'class': 'form-control',
+            'placeholder': 'Post your comments'}))
 
-    class Meta:
+    class Meta:            
         model = Comment
-        fields = ('body',)
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields['post'].widget = forms.HiddenInput()
