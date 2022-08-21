@@ -54,6 +54,22 @@ body {
     justify-content: center;
 }
 
+.right {
+    display: flex;
+    justify-content: right;
+}
+
+.container.space-around {
+    justify-content: space-around;
+  }
+
+.container.space-between {  
+  justify-content: space-between;
+}  
+
+.container.space-between {  
+    justify-content: space-between;
+  }
 .font_italic {
     font-style: italic
 }

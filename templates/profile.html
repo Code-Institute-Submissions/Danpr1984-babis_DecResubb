@@ -2,48 +2,47 @@
 {% load static %}
 
 
+{% block content %}
 
-  {% block content %}
-  
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-      <div class="container-fluid">
-        <div class="navbar-nav me-auto mb-2 mb-lg-0" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li>
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container-fluid">
+    <div class="navbar-nav me-auto mb-2 mb-lg-0" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <p class="nav-link">{{user}}</p>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link">This is {{child_name}}s profile</p>
+        </li>
+        {% if request.user.is_parent %}
+        <!--Check amount of friends and friends list-->
+        <li class="nav-item">
+          {% for friend in profile.get_friends %}
+          {{friend}}
+          <br>
+          {% endfor %}
+          <!--Number of friends: {{profile.get_friends_no}}-->
+        </li>
 
-            </li>
-            {% if request.user.is_parent %}
-            <li class="nav-item">
-              <p class="nav-link">{{user}}</p>
-            </li>
-            <!--Check amount of friends and friends list-->
-            <li class="nav-item">
-              {% for friend in profile.get_friends %}
-              {{friend}}
-              <br>
-              {% endfor %}
-              <!--Number of friends: {{profile.get_friends_no}}-->
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="add_child" role="button" rel="nofollow">Add Child Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="" role="button" rel="nofollow">Invite Guest</a>
-            </li>
-            {% endif %}
-        </div>
-      </div>
-    </nav>
+        <li class="nav-item">
+          <a class="nav-link" href="add_child" role="button" rel="nofollow">Add Child Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" role="button" rel="nofollow">Invite Guest</a>
+        </li>
+        {% endif %}
+    </div>
+  </div>
+</nav>
 
 
-    <!-- Jumbotron -->
-    <div id="intro" class="p-5 text-center bg-light">
+<!-- Jumbotron -->
+<div id="intro" class="p-5 text-center bg-light">
 
-      <!--<a class="btn btn-primary m-12" data-bs-toggle="modal" data-bs-target="#postModal">Post a ***BABYNAME*** moment</a>-->
-      <a class="btn btn-primary m-12" href="add_post">Post a  moment</a>
-       <!--Button trigger modal -->
-<!--<button type="button" class="btn btn-primary m-12" data-bs-toggle="modal" data-bs-target="#postModal">
+  <!--<a class="btn btn-primary m-12" data-bs-toggle="modal" data-bs-target="#postModal">Post a ***BABYNAME*** moment</a>-->
+  <a class="btn btn-primary m-12" href="add_post">Post a moment</a>
+  <!--Button trigger modal -->
+  <!--<button type="button" class="btn btn-primary m-12" data-bs-toggle="modal" data-bs-target="#postModal">
   Post a moment
 </button>
 
@@ -80,69 +79,66 @@
   </div>
 </div>-->
 
+</div>
 
-    </div>
-    <!--<a class="btn btn-primary m-2" href="" target="_blank"
-            role="button">Download MDB UI KIT</a>-->
-    </div>
-    <!-- Jumbotron -->
-  
-  <!--Main Navigation-->
+</div>
 
-  <!--Main layout-->
+<!--Main layout-->
 
-  <div class="my-5">
-    <div class="container">
-      <!--Section: Content-->
-      <section class="text-center">
-        <h4 class="mb-5"><strong>Latest posts</strong></h4>
-        <div class="row">
-          {% for post in post_list %}
-          <div class="mx-auto col-md-6 mb-4 position-relative">
-            <div class="card">
-              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img class="card-img-top" src=" {{ post.featured_image.url }}">
-                <p class="card-text secondary_font">{{ post.author }}</p>
-                <h5 class="card-title secondary_font">{{ post.title }}</h5>
+
+<div class="my-5">
+  <div class="container">
+    <!--Section: Content-->
+    {% for post in post_list %}
+    <section class="text-center">
+      <h4 class="mb-5"><strong>Latest posts</strong></h4>
+      <div class="row">
+        <div class="mx-auto col-md-6 mb-4">
+          <div class="card">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img class="card-img-top" src=" {{ post.featured_image.url }}">
+              <div style="background-color: rgb(221, 247, 237);">
+                <h5 class="card-title secondary_font">{{ post.title }} <span><i class="fa-solid fa-heart"></i></span></h5>
                 <p class="card-text secondary_font">{{ post.content }}</p>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary comment-btn" data-bs-toggle="modal" data-bs-target="#commentModal" data-post="{{post.id}}">
-                  Launch demo modal
-                </button>
-
-                  <p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        Comments
-                      </button>
-                  </p>
-                    <div class="collapse" id="collapseExample">
-                      <div class="card card-body">
-                         {% for comment in post.comments.all %}
-                        </div>
-                          <p> {{comment}}</p>
-                        </div>
-                        {% endfor%}
-                      </div>
+                <p class="card-text secondary_font d-flex justify-content-end me-2"> posted by {{ post.author }} </p>
+                <div>
+                  <button type="button" class="btn btn-outline-secondary comment-btn me-8" data-bs-toggle="modal"
+                    data-bs-target="#commentModal" data-post="{{post.id}}">
+                    Comment
+                  </button>
+                  <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    See comments
+                  </button>
+                  {% for comment in post.comments.all %}
+                  <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                      
+                      <p>{{comment.created_on}}</p>
+                      <p>{{comment.author}}</p>
+                      <p> {{comment}}</p>
+                     
                     </div>
+                  </div>
+                  {% endfor%}
+                </div>  
               </div>
-              <div>
-                <!--{% for comment in post.comments.all %}
-                {{comment}}
-                {% endfor%}-->
-              </div>
+              <!-- Button trigger modal -->
+              
             </div>
+            
           </div>
-        
-          {% endfor%}
         </div>
+      </div>
 
-      </section>
-    </div>
+      {% endfor%}
+  </div>
 
-
-  
+  </section>
+</div>
 
 <!-- Modal -->
+
 <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -151,32 +147,26 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{% url 'profile' %}">
-    
+      <form method="POST" action="{% url 'profile' %}">
           {% csrf_token %}
           {{ commentform.as_p }}
-      <button type="submit">Post</button>
-  
-      </form>
+          
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </form>  
       </div>
     </div>
   </div>
-</div>  
+</div>
 <script>
   let commentBtns = document.getElementsByClassName('comment-btn');
-  for (let i = 0; i < commentBtns.length; i++){
+  for (let i = 0; i < commentBtns.length; i++) {
     commentBtns[i].addEventListener('click', (e) => {
       let postInput = document.getElementById('id_post')
       postInput.value = e.target.getAttribute('data-post')
     })
-  
-  
   }
 </script>
-  {% endblock content %}
-
-
+{% endblock content %}

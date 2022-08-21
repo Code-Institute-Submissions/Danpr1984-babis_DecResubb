@@ -49,7 +49,6 @@ class GuestProfile(models.Model):
 
 class Profile(models.Model):
     child_name = models.CharField(max_length=200, unique=True) 
-    id_child = models.IntegerField(default=None)
     user = models.ForeignKey(ParentProfile, on_delete=models.CASCADE)
     profile_image = CloudinaryField('image', default='placeholder') 
     birthdate = models.DateField()
@@ -93,7 +92,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
-    likes = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='likes', default=None)
+    likes = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='likes', null=True, default=None)
 
     class Meta:
         verbose_name_plural = "Posts"

@@ -24,7 +24,7 @@ class PostForm(forms.ModelForm):
         required=False,
         label="Tell us more about this moment",
         widget=forms.Textarea(attrs={
-            'rows': 6,
+            'rows': 5,
             'width':'60%',
             'class': 'form-control',
             'placeholder': 'Share your experience'}))
@@ -59,7 +59,6 @@ class ParentForm(forms.ModelForm):
 
         widget = {
             'parent_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'user': forms.TextInput(attrs={'class': 'form-control'}),
             'profile_image': forms.ImageField(),
         }
 
@@ -74,7 +73,25 @@ class ChildForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = '__all__'
-        
+        exclude = ('user',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
+        super(ChildForm, self).__init__(*args, **kwargs) 
+
+    def save(self, commit=True):
+        obj = super(ChildForm, self).save(commit=False)
+        user = None
+        if self.request:
+            if hasattr(self.request, "user"):
+                # Almacenar el usuario
+                user = self.request.user
+        if commit:
+            ### Almacenar el usuario en host
+            obj.user = user
+            obj.save()
+        return obj       
+
 
 
 class CommentForm(forms.ModelForm):
