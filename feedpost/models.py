@@ -13,12 +13,12 @@ class CustomUser(AbstractUser):
 
     def add_user(self):
         return self.save()
-    
+
 
     def get_absolute_url(self):
         if self.is_parent:
-            return reverse('parent')    
-        else: 
+            return reverse('parent')
+        else:
             return reverse('guest')
 
 
@@ -32,33 +32,33 @@ class ParentProfile(models.Model):
 
     def __str__(self):
         return self.parent_name
-     
+
 
 class GuestProfile(models.Model):
     guest_name = models.CharField(max_length=200, unique=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    profile_image = CloudinaryField('image', default='placeholder') 
-    
+    profile_image = CloudinaryField('image', default='placeholder')
+
 
     def get_absolute_url(self):
         return reverse('profile')
 
     def __str__(self):
-        return self.guest_name    
+        return self.guest_name
 
 
 class Profile(models.Model):
-    child_name = models.CharField(max_length=200, unique=True) 
+    child_name = models.CharField(max_length=200, unique=True)
     user = models.ForeignKey(ParentProfile, on_delete=models.CASCADE)
-    profile_image = CloudinaryField('image', default='placeholder') 
+    profile_image = CloudinaryField('image', default='placeholder')
     birthdate = models.DateField()
     friends = models.ManyToManyField(CustomUser, related_name='friends', blank=True)
-    
+
     def get_friends(self):
         return self.friends.all()
 
     def get_friends_no(self):
-        return self.friends.all().count()    
+        return self.friends.all().count()
 
     def get_absolute_url(self):
         return reverse('profile')
@@ -84,7 +84,7 @@ class Relationship(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True) 
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True)
     #profile = models.ForeignKey(Child, on_delete=models.CASCADE, related_name="child_profile")
     content = models.TextField()
     featured_image = CloudinaryField('image', default='placeholder')
@@ -102,36 +102,16 @@ class Post(models.Model):
         return self.title
 
     def number_of_likes(self):
-        return self.likes.count()   
+        return self.likes.count()
 
     def get_absolute_url(self):
         return reverse('profile')
-    
-        
 
-
-#class Comment(models.Model):
- #   name = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-  ###created_on = models.DateTimeField(auto_now_add=True)
-    #edited_on = models.DateTimeField(auto_now_add=True)
-    #deleted_on = models.DateTimeField(auto_now_add=True)
-    
-    
-    #class Meta:
-     #   ordering = ['created_on']
-
-    #def save(self, *args, **kwargs):
-    #    super().save(*args, **kwargs)     
-    
-    #def __str__(self):
-     #   return '%s - %s' %(self.post.title, self.name)
-     
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(CustomUser, max_length=200, default="name")
     text = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    
 
     class Meta:
         ordering = ['created_on']
@@ -140,5 +120,4 @@ class Comment(models.Model):
         return self.text
 
     def get_absolute_url(self):
-        return reverse('profile') #kwargs={'pk': self.pk})     
-
+        return reverse('profile') #kwargs={'pk': self.pk}

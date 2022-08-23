@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class RegisterForm(UserCreationForm):
-    
+
     class Meta:
         model = CustomUser
         fields = ["is_guest", "is_parent", "username", "password1", "email"]
@@ -28,7 +28,7 @@ class PostForm(forms.ModelForm):
             'width':'60%',
             'class': 'form-control',
             'placeholder': 'Share your experience'}))
-    
+
     class Meta:
         model = Post
         fields = '__all__'
@@ -36,7 +36,7 @@ class PostForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request", None)
-        super(PostForm, self).__init__(*args, **kwargs) 
+        super(PostForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
         obj = super(PostForm, self).save(commit=False)
@@ -49,9 +49,9 @@ class PostForm(forms.ModelForm):
             ### Almacenar el usuario en host
             obj.author = user
             obj.save()
-        return obj       
-            
-class ParentForm(forms.ModelForm):   
+        return obj
+
+class ParentForm(forms.ModelForm):
 
     class Meta:
         model = ParentProfile
@@ -62,13 +62,13 @@ class ParentForm(forms.ModelForm):
             'profile_image': forms.ImageField(),
         }
 
-class GuestForm(forms.ModelForm):   
+class GuestForm(forms.ModelForm):
 
     class Meta:
         model = GuestProfile
         fields = '__all__'
 
-class ChildForm(forms.ModelForm):   
+class ChildForm(forms.ModelForm):
 
     class Meta:
         model = Profile
@@ -77,21 +77,20 @@ class ChildForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request", None)
-        super(ChildForm, self).__init__(*args, **kwargs) 
+        super(ChildForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
         obj = super(ChildForm, self).save(commit=False)
         user = None
         if self.request:
             if hasattr(self.request, "user"):
-                # Almacenar el usuario
+                # Saves user
                 user = self.request.user
         if commit:
             ### Almacenar el usuario en host
             obj.user = user
             obj.save()
-        return obj       
-
+        return obj
 
 
 class CommentForm(forms.ModelForm):
@@ -103,7 +102,7 @@ class CommentForm(forms.ModelForm):
             'class': 'form-control',
             'placeholder': 'Post your comments'}))
 
-    class Meta:            
+    class Meta: 
         model = Comment
         fields = '__all__'
 

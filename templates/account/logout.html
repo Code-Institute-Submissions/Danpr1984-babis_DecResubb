@@ -9,13 +9,13 @@
 {% block content %}
 <div class="d-flex justify-content-center" style="margin-top:30px">
   <h1>{% trans "Sign Out" %}</h1>
-  
-</div>  
+
+</div>
 <div class="form-group d-flex align-items-center justify-content-center">
   <form method="post" action="{% url 'account_logout' %}">
     {% csrf_token %}
     {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
     <button type="submit">{% trans 'Sign Out' %}</button>
   </form>

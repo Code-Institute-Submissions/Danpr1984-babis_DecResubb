@@ -6,11 +6,11 @@
     {% block content %}
     <div class="form-group d-flex align-items-center justify-content-center" style="height:550px">
         <form method="POST" enctype="multipart/form-data">
-    
+
             {% csrf_token %}
             {{ form.as_p }}
-        <button type="submit">Create Profile</button>
-    
+            <button type="submit">Create Profile</button>
+
         </form>
     </div>
     {% endblock content %}

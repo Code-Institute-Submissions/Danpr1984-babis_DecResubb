@@ -9,9 +9,6 @@
     <div class="navbar-nav me-auto mb-2 mb-lg-0" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <p class="nav-link">{{user}}</p>
-        </li>
-        <li class="nav-item">
           <p class="nav-link">This is {{child_name}}s profile</p>
         </li>
         {% if request.user.is_parent %}
@@ -23,7 +20,6 @@
           {% endfor %}
           <!--Number of friends: {{profile.get_friends_no}}-->
         </li>
-
         <li class="nav-item">
           <a class="nav-link" href="add_child" role="button" rel="nofollow">Add Child Profile</a>
         </li>
@@ -31,60 +27,19 @@
           <a class="nav-link" href="" role="button" rel="nofollow">Invite Guest</a>
         </li>
         {% endif %}
-    </div>
+      </ul>
+      
   </div>
 </nav>
 
 
 <!-- Jumbotron -->
 <div id="intro" class="p-5 text-center bg-light">
-
   <!--<a class="btn btn-primary m-12" data-bs-toggle="modal" data-bs-target="#postModal">Post a ***BABYNAME*** moment</a>-->
   <a class="btn btn-primary m-12" href="add_post">Post a moment</a>
-  <!--Button trigger modal -->
-  <!--<button type="button" class="btn btn-primary m-12" data-bs-toggle="modal" data-bs-target="#postModal">
-  Post a moment
-</button>
-
- Modal 
-<div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="postModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="d-flex justify-content-center" style="margin-top:30px">
-          <h1>Share a Moment</h1>
-      </div>
-      </br>
-      
-      <div class= "d-flex align-items-center justify-content-center">
-      <br/><br/>
-          <form method="POST" action="{% url 'profile' %}">
-      
-              {% csrf_token %}
-              {{ postform.as_p }}
-          <button type="submit">Post</button>
-      
-          </form>
-      </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>-->
-
-</div>
-
 </div>
 
 <!--Main layout-->
-
 
 <div class="my-5">
   <div class="container">
@@ -98,9 +53,14 @@
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
               <img class="card-img-top" src=" {{ post.featured_image.url }}">
               <div style="background-color: rgb(221, 247, 237);">
-                <h5 class="card-title secondary_font">{{ post.title }} <span><i class="fa-solid fa-heart"></i></span></h5>
+                <h5 class="card-title secondary_font">{{ post.title }} <span><i class="fa-solid fa-heart"></i></span>
+                </h5>
                 <p class="card-text secondary_font">{{ post.content }}</p>
                 <p class="card-text secondary_font d-flex justify-content-end me-2"> posted by {{ post.author }} </p>
+                <div class="col-md-5 col-sm-6">
+                  <a href="{% url 'edit_post' post.pk %}" class="btn btn-light">Edit</a>
+                </div>
+               
                 <div>
                   <button type="button" class="btn btn-outline-secondary comment-btn me-8" data-bs-toggle="modal"
                     data-bs-target="#commentModal" data-post="{{post.id}}">
@@ -113,20 +73,16 @@
                   {% for comment in post.comments.all %}
                   <div class="collapse" id="collapseExample">
                     <div class="card card-body">
-                      
                       <p>{{comment.created_on}}</p>
                       <p>{{comment.author}}</p>
                       <p> {{comment}}</p>
-                     
                     </div>
                   </div>
-                  {% endfor%}
-                </div>  
+                </div>
+                
+                {% endfor%}
               </div>
-              <!-- Button trigger modal -->
-              
             </div>
-            
           </div>
         </div>
       </div>
@@ -147,15 +103,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="{% url 'profile' %}">
+        <form method="POST" action="{% url 'profile' %}">
           {% csrf_token %}
           {{ commentform.as_p }}
-          
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save changes</button>
-      </form>  
+        </form>
       </div>
     </div>
   </div>

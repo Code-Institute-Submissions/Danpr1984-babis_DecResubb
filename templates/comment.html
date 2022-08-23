@@ -3,18 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class= "d-flex align-items-center justify-content-center">
-    <br/><br/>
-        <form method="POST" enctype="multipart/form-data">
-    
-            {% csrf_token %}
-            {{ form.as_p }}
+<div class="d-flex align-items-center justify-content-center">
+    <br /><br />
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit">Post</button>
-    
-        </form>
-    </div>
-    
- 
+
+    </form>
+</div>
+
+
 
 {% endblock content %}
 </main>

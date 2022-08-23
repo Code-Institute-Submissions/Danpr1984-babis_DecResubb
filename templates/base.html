@@ -4,136 +4,138 @@
 <html class="h-100">
 
 <head>
-    <title>Babis</title>
+  <title>Babis</title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
-    </script>
-    <script src="{% static 'base.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+  </script>
+  <script src="{% static 'base.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
 
 </head>
 
 <body class="d-flex flex-column h-100 main-bg">
 
-    <!-- Navigation -->
+  <!-- Navigation -->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container-fluid">
-          <a class="navbar-brand primary_font large_text light_font white_font" href="{% url 'home' %}">
-            <img src="https://img.freepik.com/premium-vector/cute-baby-elephant-with-moon-stars-vector-illustration_159446-654.jpg?w=740" width="60"> Babis
-        </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-                    </li>
-                    
-                    {% if user.is_authenticated%}
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'account_logout'%}">Logout</a>
-                    </li>
-                    
-                    {% else %}
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+      <a class="navbar-brand primary_font large_text light_font white_font" href="{% url 'home' %}">
+        <img
+          src="https://img.freepik.com/premium-vector/cute-baby-elephant-with-moon-stars-vector-illustration_159446-654.jpg?w=740"
+          width="60"> Babis
+      </a><span class="font_italic">Share special moments of your little ones with the people that matter</span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
 
-                    <li class="nav-item">
-                      <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Register
-                      </a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login'%}">Login</a>
-                    </li>
-                    
-                    
-                    {% endif %}
-                </ul>
-                <span class="navbar-text text-muted">
-                    
-                </span>
-            </div>
-        </div>
-    </nav>
+          {% if user.is_authenticated%}
+          
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'account_logout'%}">Logout</a>
+          </li>
+          <li class="nav-item">
+            <p class="nav-link">{{user}}</p>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Register
+            </a>
+          </li>
 
-    <main class="flex-shrink-0 main-bg">
-        {% block content %}
-        <!-- Content Goes here -->
-        {% endblock content %}
-    </main>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_login'%}">Login</a>
+          </li>
 
-    <!-- Footer -->
-    
-     <!--Footer-->
-     <footer class="bg-light text-lg-start">
-        
-        <div class="text-center py-4 align-items-center">
-          <p>Follow Babis on social media</p>
-          <a href="" class="btn btn-primary m-1" role="button"
-            rel="nofollow" target="_blank">
-            <i class="fab fa-youtube"></i>
-          </a>
-          <a href="" class="btn btn-primary m-1" role="button" rel="nofollow"
-            target="_blank">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="" class="btn btn-primary m-1" role="button" rel="nofollow"
-            target="_blank">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="" class="btn btn-primary m-1" role="button" rel="nofollow"
-            target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
-    
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-          © 2022 Copyright:
-          <a class="text-dark" href="">Daniel Porras</a>
-        </div>
-        <!-- Copyright -->
-      </footer>
-      <!--Footer-->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-              
-              
-            </div>
-          </div>
-        </div>
+
+          {% endif %}
+        </ul>
+        <span class="navbar-text text-muted">
+
+        </span>
+      </div>
     </div>
-     
+  </nav>
+
+  <main class="flex-shrink-0 main-bg">
+    {% block content %}
+    <!-- Content Goes here -->
+    {% endblock content %}
+  </main>
+
+  <!-- Footer -->
+
+  <!--Footer-->
+  <footer class="bg-light text-lg-start">
+
+    <div class="text-center py-4 align-items-center">
+      <p>Follow Babis on social media</p>
+      <a href="" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2022 Copyright:
+      <a class="text-dark" href="">Daniel Porras</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!--Footer-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Continue</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>

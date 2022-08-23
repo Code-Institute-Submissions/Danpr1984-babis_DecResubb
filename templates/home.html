@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-    
+
 <header>
   <div class="container">
     <div id="navbar-container"></div>
@@ -11,43 +11,49 @@
 
 
 
- <!-------------------------SEPARATE-->
-        {% block content %}
-        <section>
-          <div style="background-image:url('https://i.pinimg.com/originals/12/10/6e/12106e3e9a806affae8bb4a63887fd9d.gif');height: 700px; background-size:cover ; background-repeat: no-repeat">
-            <p class="right me-3 large_text font_italic" style="color: white;">Share the special moments of your little ones with the people that really matter</p>
-          </div>  
-          
-        </section>
-       <!-- end of section homepage  -->
-      
-      <!-- section about--> 
-      <section class="about-section my-5">
-          <div class="container">
-               <h1 class="text-center mb-3">About Us</h1>
-          <hr class="mb-5">
-            <div class="row">
-              <div class="col-md-4 mx-auto">
-                <img src="" class="img-fluid" alt="" />
-              </div>
-              <div class="col-md-4 mx-auto">
-                <p>"Life can be challenging sometimes. We go through ups and downs mentally and physically. 
-                    The reality is that you are not alone, 
-                    thousands of people feel lonely, anxious, sad, or too tired every day. 
-                </p> 
-                <p>
-                  Here at BetaMind you will enter a space created to help you feel better about yourself, to feel understood and to meet
-                  others who are willing to listen to you, share their stories, cheer you up and why not, have a laugh.
-                  Check our feel-good content and connect with people that just like you, 
-                  are seeking for some company and to get some peace of mind."
-              </p> 
-              </div>
+<!-------------------------SEPARATE-->
+{% block content %}
+<section>
+  <div
+    style="background-image:url('https://i.pinimg.com/originals/12/10/6e/12106e3e9a806affae8bb4a63887fd9d.gif');height: 700px; background-size:cover ; background-repeat: no-repeat">
+  </div>
+
+</section>
+<!-- end of section homepage  -->
+
+<!-- section about-->
+<section class="about-section my-5">
+  <div class="container">
+    <h1 class="text-center mb-3">About Us</h1>
+    <hr class="mb-5">
+    <div class="row">
+      <div class="col-md-4 mx-auto">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100" src="static/images/theo_mom.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="static/images/theo_dad.jpg" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="static/images/theo_sunset.jpg" alt="Third slide">
             </div>
           </div>
-        </section>
-          
-        <!-------------------------SEPARATE-->
-        
-        {% endblock content %}
+        </div>
+      </div>
+      <div class="col-md-4 mx-auto">
+        <p>
+        </p>
+        <p>
+          "Share the special moments of your little ones
+          with the people that really matter. Babis is a quiet space where the only purpose is to extend the connection between loved ones in an intimate way."
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    
+<!-------------------------SEPARATE-->
+
+{% endblock content %}
