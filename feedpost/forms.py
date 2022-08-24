@@ -1,14 +1,15 @@
 from django import forms
 from .models import CustomUser, Post, ParentProfile, GuestProfile, Profile, Comment
 from django.contrib.auth.forms import UserCreationForm
-#class RegistrationForm(forms.ModelForm):
 
 
-class RegisterForm(UserCreationForm):
+
+class RegisterForm(UserCreationForm, ):
 
     class Meta:
         model = CustomUser
         fields = ["is_guest", "is_parent", "username", "password1", "email"]
+
 
 class PostForm(forms.ModelForm):
 
@@ -56,11 +57,25 @@ class ParentForm(forms.ModelForm):
     class Meta:
         model = ParentProfile
         fields = '__all__'
+        exclude = ('user',)
 
-        widget = {
-            'parent_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'profile_image': forms.ImageField(),
-        }
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
+        super(ParentForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        obj = super(ParentForm, self).save(commit=False)
+        user = None
+        if self.request:
+            if hasattr(self.request, "user"):
+                # Almacenar el usuario
+                user = self.request.user
+        if commit:
+            ### Almacenar el usuario en host
+            obj.user = user
+            obj.save()
+        return obj
+       
 
 class GuestForm(forms.ModelForm):
 
@@ -84,15 +99,14 @@ class ChildForm(forms.ModelForm):
         user = None
         if self.request:
             if hasattr(self.request, "user"):
-                # Saves user
+                # Almacenar el usuario
                 user = self.request.user
         if commit:
             ### Almacenar el usuario en host
             obj.user = user
             obj.save()
         return obj
-
-
+        
 class CommentForm(forms.ModelForm):
     model = Comment
     text = forms.CharField(

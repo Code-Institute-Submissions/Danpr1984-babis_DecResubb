@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractUser
 from django.dispatch import receiver
-from .models import Profile, GuestProfile,ParentProfile, CustomUser
+from .models import Profile, GuestProfile, ParentProfile, CustomUser
 
 @receiver(post_save, sender=Relationship)
 def post_save_add_to_friends(sender, created, instance, **kwargs):

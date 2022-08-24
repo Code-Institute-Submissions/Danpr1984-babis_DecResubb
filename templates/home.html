@@ -9,8 +9,6 @@
   </div>
 </header>
 
-
-
 <!-------------------------SEPARATE-->
 {% block content %}
 <section>
@@ -19,6 +17,7 @@
   </div>
 
 </section>
+
 <!-- end of section homepage  -->
 
 <!-- section about-->
@@ -27,21 +26,6 @@
     <h1 class="text-center mb-3">About Us</h1>
     <hr class="mb-5">
     <div class="row">
-      <div class="col-md-4 mx-auto">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img class="d-block w-100" src="static/images/theo_mom.jpg" alt="First slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="static/images/theo_dad.jpg" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="static/images/theo_sunset.jpg" alt="Third slide">
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="col-md-4 mx-auto">
         <p>
         </p>
@@ -53,7 +37,28 @@
     </div>
   </div>
 </section>
-
+<div class="col-md-4 mx-auto">
+  <div id="carouselBabis" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner"> 
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="https://res.cloudinary.com/dsxoxa2ha/image/upload/v1661281829/theo_dad_vil54v.jpg" alt="Second slide">
+      </div>
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="https://res.cloudinary.com/dsxoxa2ha/image/upload/v1661281784/theo_mom_vbs4yc.jpg" alt="First slide">
+      </div>
+      <div class="carousel-item ">
+        <img class="d-block w-100" src="https://res.cloudinary.com/dsxoxa2ha/image/upload/v1661281784/theo_sunset_snsr0o.jpg" alt="Third slide">
+      </div>
+    </div>
+  </div>
+</div>
 <!-------------------------SEPARATE-->
+<script>
+var myCarousel = document.getElementById('carouselBabis')
+
+myCarousel.addEventListener('slide.bs.carousel', function () {
+  // do something...
+})
+</script>
 
 {% endblock content %}

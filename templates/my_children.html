@@ -1,0 +1,13 @@
+
+
+ 
+    {% block foo  %}
+    
+    <div>
+        {% for profile in profile_list %}
+       <h1> {{profile.child_name}} </h1>
+        {% endfor %}
+    </div>
+
+    
+    {% endblock foo%}

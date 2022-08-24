@@ -88,15 +88,31 @@ body {
 
 .btn-primary {
     color: #fff;
-    background-color:rgb(169, 244, 222)!important;
+    background-color:rgb(155, 196, 127)!important;
     border-color: rgb(169, 244, 222)!important;
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
-    background-color: #ba9a85!important;
-    border-color: #72675f!important;
+    background-color: rgb(132, 150, 120)!important;
+    border-color: rgb(132, 150, 120)!important;
     box-shadow: none;
     outline: none;
 }
 
+.btn-link {
+    color:rgb(113, 143, 93)!important;
+    text-decoration: none;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+    color: #fff!important;
+    background-color: rgb(132, 150, 120)!important;
+    box-shadow: none;
+    outline: none;
+}
+
+.dropdown-item {
+    white-space: pre-wrap;
+  }
