@@ -11,7 +11,7 @@ from pathlib import Path
 import os
 import dj_database_url
 if os.path.isfile("env.py"):
-    import env
+   import env
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
@@ -56,7 +56,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-#ACCOUNT_SIGNUP_REDIRECT_URL = 'welcome_page'
+ACCOUNT_SIGNUP_REDIRECT_URL = 'welcome_page'
 
 LOGIN_REDIRECT_URL = 'welcome_page'
 LOGOUT_REDIRECT_URL = '/'
