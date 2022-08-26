@@ -29,6 +29,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#
+# X_FRAME_OPTIONS = "SAMEORIGIN"
+
 ALLOWED_HOSTS = ['babis-app.herokuapp.com', 'localhost']
 
 
@@ -54,7 +57,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-#ACCOUNT_SIGNUP_REDIRECT_URL = 'parent'
+#ACCOUNT_SIGNUP_REDIRECT_URL = 'welcome_page'
 
 LOGIN_REDIRECT_URL = 'welcome_page'
 LOGOUT_REDIRECT_URL = '/'

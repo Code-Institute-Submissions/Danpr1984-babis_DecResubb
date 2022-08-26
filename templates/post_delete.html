@@ -9,20 +9,22 @@
 <div>
 
     <div class="row justify-content-center mt-3 mb-5">
-        <div class="col-md-5 col-sm-12 border-bottom">
+        <div class="col-md-5 col-sm-12 border-bottom ">
             <form method="POST">
                 {% csrf_token %}
                 <h5 class="title_font">Are You Sure?</h5>
                 <p>You are about to delete this post, this cannot be undone.</p>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" href="post_detail.html">Go Back</button>
+                <div class="d-flex justify-content-between" style="margin-top:150px;">
+                    <button class="btn btn-primary" style="width: 200px;" href="post_detail.html">Go Back</button>
+                    <button class="btn btn-danger" style="width: 200px;">Delete</button>
                 </div>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-danger">Delete</button>
-                </div>
+                
             </form>
         </div>    
     </div>
+</div>
+<div>
+    <div style="height:250px;"></div>
 </div>
 
 {% endblock content %}

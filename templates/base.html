@@ -14,6 +14,10 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Social network for parents to share posts of their children with closest ones. It's like a diary
+              where parents can keep relatives and friends updated">
+  <meta name="keywords"
+    content="Babies, children, family, love, connection, socia media, together, private">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
@@ -40,7 +44,7 @@
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarText">
+      <div class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 10px;"id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
@@ -56,7 +60,7 @@
               aria-expanded="false">
               {{user}}
             </a>
-            {% if user.is_parent %}  
+            {% if user.is_parent %}
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
                 <a class="dropdown-item small_text" href="{% url 'add_child'%}"
@@ -78,7 +82,7 @@
                   aria-label="Go to the each category page">Logout</a>
               </li>
             </ul>
-            {% endif %}  
+            {% endif %}
 
             {% else %}
           <li class="nav-item">
