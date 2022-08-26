@@ -11,7 +11,7 @@ from pathlib import Path
 import os
 import dj_database_url
 if os.path.isfile("env.py"):
-   import env
+    import env
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +29,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-#
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
 ALLOWED_HOSTS = ['babis-app.herokuapp.com', 'localhost']
