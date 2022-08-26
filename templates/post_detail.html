@@ -3,38 +3,12 @@
 
 
 {% block content %}
-
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
-  <div class="container-fluid">
-    <div class="navbar-nav me-auto mb-2 mb-lg-0" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        {% if request.user.is_parent %}
-        <div class="dropdown show">
-          <a class="btn nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" id="dropdownMenuLink"
-            aria-haspopup="true" aria-expanded="false">
-            {{user}}
-          </a>
-          <div class="btn nav-item dropdown show dropdown-menu text-lg-start" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="add_child">Add Child Profile</a>
-            <a class="dropdown-item" href="#">Invite Guest</a>
-          </div>
-        </div>
-        <div></div>
-        <div></div>
-        {% endif %}
-      </ul>
-
-    </div>
-</nav>
-<div>
-  {% for profile in profile_list.all %}
- <h1> {{profile.child_name}} </h1>
-  {% endfor %}
+{% for profile in profile_list.all %}
+<h1> {{profile.child_name}} </h1>
+{% endfor %}
 </div>
-
-
 <!-- Jumbotron -->
-<div id="intro" class="p-5 text-center bg-light">
+<div id="intro" class="p-5 text-center post-color">
   <!--<a class="btn btn-primary m-12" data-bs-toggle="modal" data-bs-target="#postModal">Post a ***BABYNAME*** moment</a>-->
   <a class="btn btn-primary m-12" href="add_post">Post a moment</a>
 </div>
@@ -44,30 +18,51 @@
 <div class="my-5">
   <div class="container">
     <!--Section: Content-->
-    
-    <div>
-      {% for profile in profile_list %}
-     <h1> {{profile.child_name}} </h1>
-      {% endfor %}
-  </div>
+
     {% for post in post_list %}
     <section class="text-center">
       <div class="row">
-        <div class="mx-auto col-md-6 mb-4">
+        <div class="mx-auto col-md-6 mb-4" style="margin-top:25px">
           <div class="card">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
               <img class="card-img-top" src=" {{ post.featured_image.url }}">
-              <div style="background-color: rgb(233, 232, 225);">
-                <div class="d-flex justify-content-around">
-                  <h6 class="card-title primary_font medium_font font_italic">{{ post.title }}</h6>
-
+              <div class="post-color">
+                <div>
+                  <p class="small_text">{{post.created_at}}</p>
+                  <div class="col-1 d-flex justify-content-center">
+                    <strong>
+                      {% if user.is_authenticated %}
+                      <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+                        {% csrf_token %}
+                        {% if liked %}
+                        <button type="submit" class="btn btn-primary" value="{{post.slug}}" class="btn-like"><i
+                            class="fas fa-heart"></i></button>
+                        {% else %}
+                        <button type="submit" value="{{post.slug}}" class="btn-like"><i
+                            class="far fa-heart"></i></button>
+                        {% endif %}
+                      </form>
+                      {% else %}
+                      <span class="text-secondary"><i class="far fa-heart"></i></span>
+                      {% endif %}
+                      <!-- The number of likes goes before the closing strong tag -->
+                      <span class="text-secondary">{{ post.number_of_likes }} </span>
+                    </strong>
+                  </div>
+                  <h4 class="card-title title_font medium_font" style="font:bold;">{{ post.title }}
+                  </h4>
                 </div>
-                <p class="card-text secondary_font text-lg-center ">{{ post.content }}</p>
-                <p class="card-text secondary_font d-flex justify-content-center me-4"> posted by: {{ post.author }}</p>
+                <div>
+                  <p class="card-text secondary_font" style="text-align: justify; margin:20px">{{ post.content }}</p>
+                </div>
+                <p class="card-text secondary_font d-flex justify-content-center me-4 small_text"> posted by:
+                  {{ post.author }}</p>
+                {% if user.is_authenticated and user == post.author or user.is_superuser %}
                 <span>
                   <a href="{% url 'edit_post' post.pk %}" class="btn btn-link btn-sm">Edit</a>
                   <a href="{% url 'post_delete' post.pk %}" class="btn btn-link btn-sm">Delete</a>
                 </span>
+                {% endif %}
                 <div class="d-flex justify-content-between">
                   <button type="button" class="btn btn-link btn-sm comment-btn d-flex justify-content-start ms-4"
                     data-bs-toggle="modal" data-bs-target="#commentModal" data-post="{{post.id}}">
@@ -78,43 +73,28 @@
                     See comments
                   </button>
                 </div>
-                <div class="col-1">
-                  <strong>
-                      {% if user.is_authenticated %}
-                      <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
-                          {% csrf_token %}
-                          {% if liked %}
-                          <button type="submit"  value="{{post.slug}}" class="btn-like"><i class="fas fa-heart"></i></button>
-                          {% else %}
-                          <button type="submit"  value="{{post.slug}}" class="btn-like"><i class="far fa-heart"></i></button>
-                          {% endif %}
-                      </form>
-                      {% else %}
-                      <span class="text-secondary"><i class="far fa-heart"></i></span>
-                      {% endif %}
-                  <!-- The number of likes goes before the closing strong tag -->
-                  <span class="text-secondary">{{ post.number_of_likes }} </span>
-                  </strong>
-              </div>
 
-              {% for comment in post.comments.all %}
-              <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                  <p>{{comment.created_on}}</p>
-                  <p>{{comment.author}}</p>
-                  <p> {{comment}}</p>
+
+                {% for comment in post.comments.all %}
+                <div class="collapse" id="collapseExample">
+                  <div class="card card-body post-color">
+                    <div class="d-flex justify-content-around">
+                      <p class="small_text">{{comment.author}} says:</p>
+                      <p class="small_text">{{comment.created_on}}</p>
+                    </div>
+                    <p class="medium_text"> {{comment}}</p>
+                  </div>
                 </div>
+                {% endfor%}
               </div>
-              {% endfor%}
             </div>
           </div>
         </div>
       </div>
+      {% endfor%}
   </div>
-  {% endfor%}
-</div>
 
-</section>
+  </section>
 </div>
 
 <!-- Modal Comment-->
@@ -123,7 +103,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="commentModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="commentModalLabel"> Write your comment here:</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -133,7 +113,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Post Comment</button>
         </form>
       </div>
     </div>

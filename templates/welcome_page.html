@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+<!-------------------------SEPARATE-->
+{% block content %}
+<section>
+
+    <div
+        style="background-image:url('https://res.cloudinary.com/dsxoxa2ha/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1661431021/theo_sun_lhpyhu.jpg');height: 700px; background-size:cover ; background-repeat: no-repeat">
+        <div class="centered">
+            <div class="" style="background-color:rgba(233, 232, 225, 0.2); align-items: center;">
+                <h5 class="card-title">Welcome {{user}}!</h5>
+                <p class="font_italic">We have created a simple space where you can share <br> those special moments and your adventures together <br> with your closest ones</p>
+                {% if request.user.is_parent %}
+                <p class="card-text">What would you like to do?</p>
+                <a href="add_child" class="btn btn-primary">Add a Child Profile</a>
+                <a href="post_detail" class="btn btn-primary">Go to Feeds Page</a>
+                {% else %}
+                <a href="post_detail" class="btn btn-primary">Continue to Feeds Page</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    
+
+
+    
+    </div>
+</section>
+
+<!-- end of section homepage  -->
+
+<!-- section about-->
+
+<!-------------------------SEPARATE-->
+
+
+{% endblock content %}

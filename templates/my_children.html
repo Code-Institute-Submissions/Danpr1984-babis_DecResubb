@@ -1,13 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+<div class="d-flex justify-content-center post-color" style="margin-top:30px;">
+    <h5>This are your children with a profile:</h5>
+</div>
+<div class="form-group d-flex align-items-center justify-content-center">
+    {% for profile in profile_list %}
+    <ul>
+    <li>{{profile.child_name}}</li>
+    </ul>   
+    {% endfor %}
+</div>
+<div style="height:450px;"></div>
 
 
- 
-    {% block foo  %}
-    
-    <div>
-        {% for profile in profile_list %}
-       <h1> {{profile.child_name}} </h1>
-        {% endfor %}
-    </div>
 
-    
-    {% endblock foo%}
+
+
+{% endblock content %}

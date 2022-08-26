@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@300&family=DynaPuff:wght@500&family=Mochiy+Pop+P+One&display=swap');
+
+.font-family: 'DynaPuff', cursive;
+
 body {
     background-color: #F9FAFC;
 }
@@ -17,6 +21,13 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+.logo_font {
+    font-family: 'DynaPuff', cursive;
+}
+
+.title_font {
+    font-family: 'Alumni Sans Pinstripe'
+}
 /* .white_font {
     color: #fafafa;
 } */
@@ -101,7 +112,8 @@ body {
 }
 
 .btn-link {
-    color:rgb(113, 143, 93)!important;
+    font-weight:400;
+    color:rgb(155, 196, 127)!important;
     text-decoration: none;
 }
 
@@ -116,3 +128,24 @@ body {
 .dropdown-item {
     white-space: pre-wrap;
   }
+  
+.post-color {
+    background-color: rgb(255, 255, 240);
+}
+
+.author-color {
+    background-color: rgb(218, 215, 196)
+}  
+
+.btn-like {
+    color: #E84610;
+    border: none;
+    background: transparent;
+}
+
+.btn-like:hover,
+.btn-like:active {
+    color: #E84610;
+    background: transparent;
+    border: none;
+}

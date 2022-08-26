@@ -31,7 +31,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
-      <a class="navbar-brand primary_font large_text light_font white_font" href="{% url 'home' %}">
+      <a class="navbar-brand logo_font large_text light_font white_font" href="{% url 'home' %}">
         <img
           src="https://img.freepik.com/premium-vector/cute-baby-elephant-with-moon-stars-vector-illustration_159446-654.jpg?w=740"
           width="60"> Babis
@@ -49,25 +49,49 @@
           {% if user.is_authenticated %}
 
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'post_detail' %}">Profile</a>
+            <a class="nav-link" aria-current="page" href="{% url 'post_detail' %}">Posts-Feed</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_logout'%}">Logout</a>
-          </li>
-          {% else %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              {{user}}
+            </a>
+            {% if user.is_parent %}  
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item small_text" href="{% url 'add_child'%}"
+                  aria-label="Go to the categories page">Add Child</a>
+              </li>
+              <li>
+                <a class="dropdown-item small_text" href="{% url 'my_children'%}"
+                  aria-label="Go to the each category page">My Children</a>
+              </li>
+              <li>
+                <a class="dropdown-item small_text" href="{% url 'account_logout'%}"
+                  aria-label="Go to the each category page">Logout</a>
+              </li>
+            </ul>
+            {% else %}
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item small_text" href="{% url 'account_logout'%}"
+                  aria-label="Go to the each category page">Logout</a>
+              </li>
+            </ul>
+            {% endif %}  
+
+            {% else %}
           <li class="nav-item">
             <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Register
             </a>
           </li>
+
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account_login' %}">Login</a>
           </li>
           {% endif %}
         </ul>
-        <span class="navbar-text text-muted">
-
-        </span>
       </div>
     </div>
   </nav>
@@ -77,8 +101,6 @@
     <!-- Content Goes here -->
     {% endblock content %}
   </main>
-
-  <!-- Footer -->
 
   <!--Footer-->
   <footer class="bg-light text-lg-start">
@@ -95,14 +117,13 @@
         <i class="fab fa-twitter"></i>
       </a>
       <a href="" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
-        <i class="fab fa-github"></i>
+        <i class="fab fa-instagram"></i>
       </a>
     </div>
 
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgb(233, 232, 225);">
-      © 2022 Copyright:
-      <a class="text-dark" href="">Daniel Porras</a>
+    <div class="text-center p-3 post-color">
+      © 2022 Copyright: Daniel Porras
     </div>
     <!-- Copyright -->
   </footer>
@@ -111,7 +132,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">The User is?</h5>
+          <h5 class="modal-title title_font" id="exampleModalLabel">The User is?</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -123,8 +144,6 @@
           </form>
         </div>
         <div class="modal-footer">
-
-
         </div>
       </div>
     </div>

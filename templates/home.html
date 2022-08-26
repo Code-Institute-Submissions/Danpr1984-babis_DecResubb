@@ -3,12 +3,6 @@
 {% load crispy_forms_tags %}
 
 
-<header>
-  <div class="container">
-    <div id="navbar-container"></div>
-  </div>
-</header>
-
 <!-------------------------SEPARATE-->
 {% block content %}
 <section>
@@ -23,7 +17,7 @@
 <!-- section about-->
 <section class="about-section my-5">
   <div class="container">
-    <h1 class="text-center mb-3">About Us</h1>
+    <h1 class="text-center title_font">About Us</h1>
     <hr class="mb-5">
     <div class="row">
       <div class="col-md-4 mx-auto">
@@ -31,7 +25,10 @@
         </p>
         <p>
           "Share the special moments of your little ones
-          with the people that really matter. Babis is a quiet space where the only purpose is to extend the connection between loved ones in an intimate way."
+          with the people that really matter. Babis is a quiet space where the only purpose is to extend the connection among loved ones in an intimate way."
+        </p>
+        <p>
+          "Understanding the need of a simplier, less crowded and more delicate space where you can share with those who are really close to you, how your children are growing"
         </p>
       </div>
     </div>
@@ -55,9 +52,8 @@
 <!-------------------------SEPARATE-->
 <script>
 var myCarousel = document.getElementById('carouselBabis')
-
 myCarousel.addEventListener('slide.bs.carousel', function () {
-  // do something...
+
 })
 </script>
 

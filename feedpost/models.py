@@ -86,7 +86,6 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True)
     slug = models.SlugField(max_length=200, unique=True)
-    #profile = models.ForeignKey(Child, on_delete=models.CASCADE, related_name="child_profile")
     content = models.TextField()
     featured_image = CloudinaryField('image', default='placeholder')
     media = CloudinaryField('media', default='placeholder')

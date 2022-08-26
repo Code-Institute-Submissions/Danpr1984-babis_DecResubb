@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 
-class RegisterForm(UserCreationForm, ):
+class RegisterForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
@@ -33,7 +33,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = '__all__'
-        exclude = ('author',)
+        exclude = ('author', 'likes',)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request", None)
@@ -51,6 +51,7 @@ class PostForm(forms.ModelForm):
             obj.author = user
             obj.save()
         return obj
+
 
 class ParentForm(forms.ModelForm):
 
@@ -75,7 +76,7 @@ class ParentForm(forms.ModelForm):
             obj.user = user
             obj.save()
         return obj
-       
+
 
 class GuestForm(forms.ModelForm):
 
@@ -88,7 +89,7 @@ class ChildForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = '__all__'
-        exclude = ('user',)
+        exclude = ('user', 'friends',)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request", None)
@@ -106,7 +107,8 @@ class ChildForm(forms.ModelForm):
             obj.user = user
             obj.save()
         return obj
-        
+
+
 class CommentForm(forms.ModelForm):
     model = Comment
     text = forms.CharField(
@@ -118,7 +120,8 @@ class CommentForm(forms.ModelForm):
 
     class Meta: 
         model = Comment
-        fields = '__all__'
+        fields = ('__all__')
+        exclude = ('author',)
 
     def __init__(self, *args, **kwargs):
         super(CommentForm, self).__init__(*args, **kwargs)

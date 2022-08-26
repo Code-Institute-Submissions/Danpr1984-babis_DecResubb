@@ -20,6 +20,11 @@ class HomeView(CreateView):
     form_class = RegisterForm
 
 
+class WelcomeView(ListView):
+    model = CustomUser
+    template_name = 'welcome_page.html'
+
+
 class AddParent(CreateView):
     model = ParentProfile
     template_name = 'parent.html'
@@ -30,7 +35,7 @@ class AddParent(CreateView):
         form_kwargs.update({"request": self.request})
         return form_kwargs
 
-   
+
 class AddGuest(CreateView):
     model = GuestProfile
     template_name = 'guest.html'
@@ -39,12 +44,12 @@ class AddGuest(CreateView):
 
 class MyChildren(ListView):
     model = Profile
-    template_name = 'post_detail.html'
+    template_name = 'my_children.html'
 
     def get_queryset(self):
-        queryset = Profile.objects.filter(user=self.request.user)
+        queryset  = Profile.objects.filter(user=self.request.user)
         return queryset
-    
+
 class AddChild(CreateView):
     model = Profile
     template_name = 'add_child'
@@ -68,6 +73,7 @@ class AddPostView(LoginRequiredMixin, CreateView):
         context['postform'] = PostForm()
         return context
 
+
     def get_form_kwargs(self):
         form_kwargs = super(AddPostView, self).get_form_kwargs()
         form_kwargs.update({"request": self.request})
@@ -81,8 +87,7 @@ class PostList(LoginRequiredMixin, ListView):
     form_class = PostForm, CommentForm
 
     def get_context_data(self, **kwargs):
-
-        context = super(PostList, self).get_context_data(**kwargs)
+        context = super().get_context_data(user=self.request.user)
         context['commentform'] = CommentForm()
         return context
 
@@ -118,7 +123,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == post.author
 
 class PostLike(View):
-    
+
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
         if post.likes.filter(id=request.user.id).exists():

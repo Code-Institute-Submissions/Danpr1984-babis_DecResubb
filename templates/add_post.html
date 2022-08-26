@@ -6,8 +6,8 @@
 
 
 {% block content %}
-<div class="d-flex justify-content-center" style="margin-top:30px">
-    <h1>Share a Moment</h1>
+<div class="d-flex justify-content-center post-color" style="margin-top:30px">
+    <h1 class="title_font">Share a Moment</h1>
 </div>
 </br>
 
@@ -17,7 +17,7 @@
 
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Post</button>
+        <button class="btn btn-primary m-12" type="submit">Post</button>
 
     </form>
 </div>
