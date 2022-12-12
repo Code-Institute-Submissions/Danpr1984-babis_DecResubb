@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, DeleteView, TemplateView
 from .models import Post, CustomUser, ParentProfile, GuestProfile, Profile, Comment
 from .forms import PostForm, RegisterForm, ParentForm, GuestForm
 from .forms import ChildForm, CommentForm
@@ -132,3 +132,6 @@ class PostLike(View):
             post.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail'))
+
+class Test(TemplateView):
+    template_name = "test.html"
