@@ -1,7 +1,15 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, DeleteView, TemplateView
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    View,
+    DeleteView,
+    TemplateView,
+)
 from .models import Post, CustomUser, ParentProfile, GuestProfile, Profile, Comment
 from .forms import PostForm, RegisterForm, ParentForm, GuestForm
 from .forms import ChildForm, CommentForm
@@ -10,24 +18,24 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 class NewUser(CreateView):
     model = CustomUser
-    template_name = 'home.html'
+    template_name = "home.html"
     form_class = RegisterForm
 
 
 class HomeView(CreateView):
     model = CustomUser
-    template_name = 'home.html'
+    template_name = "home.html"
     form_class = RegisterForm
 
 
 class WelcomeView(ListView):
     model = CustomUser
-    template_name = 'welcome_page.html'
+    template_name = "welcome_page.html"
 
 
 class AddParent(CreateView):
     model = ParentProfile
-    template_name = 'parent.html'
+    template_name = "parent.html"
     form_class = ParentForm
 
     def get_form_kwargs(self):
@@ -38,21 +46,22 @@ class AddParent(CreateView):
 
 class AddGuest(CreateView):
     model = GuestProfile
-    template_name = 'guest.html'
+    template_name = "guest.html"
     form_class = GuestForm
 
 
 class MyChildren(ListView):
     model = Profile
-    template_name = 'my_children.html'
+    template_name = "my_children.html"
 
     def get_queryset(self):
-        queryset  = Profile.objects.filter(user=self.request.user)
+        queryset = Profile.objects.filter(user=self.request.user)
         return queryset
+
 
 class AddChild(CreateView):
     model = Profile
-    template_name = 'add_child'
+    template_name = "add_child"
     form_class = ChildForm
 
     def get_form_kwargs(self):
@@ -64,15 +73,13 @@ class AddChild(CreateView):
 class AddPostView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
-    template_name = 'add_post.html'
-
+    template_name = "add_post.html"
 
     def get_context_data(self, **kwargs):
 
         context = super(AddPostView, self).get_context_data(**kwargs)
-        context['postform'] = PostForm()
+        context["postform"] = PostForm()
         return context
-
 
     def get_form_kwargs(self):
         form_kwargs = super(AddPostView, self).get_form_kwargs()
@@ -82,13 +89,13 @@ class AddPostView(LoginRequiredMixin, CreateView):
 
 class PostList(LoginRequiredMixin, ListView):
     model = Post
-    template_name = 'post_detail.html'
-    queryset = Post.objects.order_by('-created_at')
+    template_name = "post_detail.html"
+    queryset = Post.objects.order_by("-created_at")
     form_class = PostForm, CommentForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(user=self.request.user)
-        context['commentform'] = CommentForm()
+        context["commentform"] = CommentForm()
         return context
 
     def post(self, request, *args, **kwargs):
@@ -97,16 +104,16 @@ class PostList(LoginRequiredMixin, ListView):
             obj = form.save(commit=False)
             obj.author = self.request.user
             obj.save()
-            return redirect('post_detail')
+            return redirect("post_detail")
 
 
 class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['content', 'title']
-    template_name = 'edit_post.html'
+    fields = ["content", "title"]
+    template_name = "edit_post.html"
 
     def get_success_url(self):
-        return reverse_lazy('post_detail')
+        return reverse_lazy("post_detail")
 
     def test_func(self):
         post = self.get_object()
@@ -115,15 +122,15 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    template_name = 'post_delete.html'
-    success_url = reverse_lazy('post_detail')
+    template_name = "post_delete.html"
+    success_url = reverse_lazy("post_detail")
 
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author
 
-class PostLike(View):
 
+class PostLike(View):
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
         if post.likes.filter(id=request.user.id).exists():
@@ -131,7 +138,8 @@ class PostLike(View):
         else:
             post.likes.add(request.user)
 
-        return HttpResponseRedirect(reverse('post_detail'))
+        return HttpResponseRedirect(reverse("post_detail"))
+
 
 class Test(TemplateView):
     template_name = "test.html"

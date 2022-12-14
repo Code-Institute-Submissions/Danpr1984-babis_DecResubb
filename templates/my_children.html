@@ -5,13 +5,15 @@
 
 {% block content %}
 <div class="d-flex justify-content-center post-color" style="margin-top:30px;">
-    <h5>This are your children with a profile:</h5>
+    <h5>These are your children with a profile:</h5>
 </div>
 <div class="form-group d-flex align-items-center justify-content-center">
     {% for profile in profile_list %}
     <ul>
-    <li>{{profile.child_name}}</li>
-    </ul>   
+        <li>
+            <h1>{{profile.child_name}}</h1>
+        </li>
+    </ul>
     {% endfor %}
 </div>
 <div style="height:450px;"></div>

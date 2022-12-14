@@ -45,14 +45,14 @@
       </button>
       <div class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 10px;"id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+
+          {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
-
-          {% if user.is_authenticated %}
-
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'post_detail' %}">Posts-Feed</a>
+            <a class="nav-link" aria-current="page" href="{% url 'post_detail' %}">Moments</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -60,7 +60,7 @@
               {{user}}
             </a>
             {% if user.is_parent %}
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
               <li>
                 <a class="dropdown-item small_text" href="{% url 'add_child'%}"
                   aria-label="Go to the categories page">Add Child</a>
@@ -89,7 +89,6 @@
               Register
             </a>
           </li>
-
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account_login' %}">Login</a>
           </li>
@@ -131,6 +130,9 @@
     <!-- Copyright -->
   </footer>
   <!--Footer-->
+
+  <!---Register form modal--->
+
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
