@@ -1,8 +1,8 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from .models import Post, CustomUser, ParentProfile, GuestProfile,
-Profile, Comment
+from .models import Post, CustomUser, ParentProfile, GuestProfile, Profile, Comment
+
 
 # Create your tests here.
 
@@ -66,12 +66,12 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "guest.html")
 
-    def test_get_edit_item_page(self):
+    # def test_get_edit_item_page(self):
 
-        post = Post.objects.create(title='Testing1234')
-        response = self.client.get(f'/post_detail/{post.slug}')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'post_detail')
+    #     post = Post.objects.create(title='Testing1234')
+    #     response = self.client.get(f'/post_detail/{post.slug}')
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'post_detail')
 
     # def test_post_page(self):
     #     '''

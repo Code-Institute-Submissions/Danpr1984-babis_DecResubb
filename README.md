@@ -1,4 +1,6 @@
 # Babis Post - Introduction
+
+![Babis](static/images/readme_images/responsiveness.png)
 Project milestone 4 for Code Institute Full-stack development program.
 This project is a Full Stack website built using the Django framework.
 was created with the purpose of bringing people together specifically of bringing the little ones of the family with their loved relatives nowadays there are multiple social media sites that have become too crowded and they have lost certain kind of intimacy and privacy for this project I asked 10 parents about how they felt posting pictures of their kids and the main stream social media‘s and ate them and replied that they just didn’t feel comfortable anymore since they didn’t know who might be watching personally I have a nine-month-old baby and I live abroad and all my relatives and friends back home are constantly demanding for information about my son so instead of sending pictures and videos to all of them separately I decided that maybe if I could create a daily diary where people could see what is going on in Theo’s life that would prevent me from spending all the time I spend every day sharing stories with our loved ones.
@@ -7,6 +9,7 @@ was created with the purpose of bringing people together specifically of bringin
 
 - [Babis Post - Introduction](#babis-post---introduction)
   - [User Experience - UX](#user-experience---ux)
+    - [Objective](#objective)
     - [User Stories](#user-stories)
     - [Agile Methodology](#agile-methodology)
     - [The Scope](#the-scope)
@@ -38,6 +41,7 @@ was created with the purpose of bringing people together specifically of bringin
     - [Languages Used](#languages-used)
       - [Django Packages](#django-packages)
     - [Frameworks - Libraries - Programs Used](#frameworks---libraries---programs-used)
+  - [Testing](#testing)  
   - [Creating the Django app](#creating-the-django-app)
   - [Deployment of This Project](#deployment-of-this-project)
   - [Final Deployment](#final-deployment)
@@ -48,6 +52,12 @@ was created with the purpose of bringing people together specifically of bringin
 
 
 ## User Experience - UX
+
+   ## Objective
+
+   For my fourth project, I intend to create an authentic, practical and useful social network website which could potentially be used in a real world environment. The main objective is to demonstrate a strong level of competency in HTML, CSS, JavaScript, Python and the Django Framework alongside showcasing high attention to detail and the importance of robust testing throughout.
+
+
 
 ### User Stories
 
@@ -76,8 +86,9 @@ was created with the purpose of bringing people together specifically of bringin
 
 ### Agile Methodology
 
-All functionality and development of this project were managed using GitHub which Projects can be found
-[here](https://github.com/Danpr1984/babis)
+All functionality and development of this project were managed using GitHub which Projects
+
+![Agile](static/images/readme_images/project_board.png)
 
 ### The Scope
 
@@ -96,14 +107,15 @@ All functionality and development of this project were managed using GitHub whic
 * For this project the colors are kept simple and comfortable for the users eyes. It's a babies a small children page, so soft 
 coloring seemed to be the right option. With a mat white and a happy green. 
 
+![Colors] (static/images/readme_images/color_palette.png)<br>
+
 #### Typography
 
 * Montserrat and Lobster are the main fonts used and for the Logo I used DynaPuff from google fonts as well as Alumni Sans Pinstripe for the titles. These fonts had a joyful feeling. 
 
 ### Wireframes
 
-![Wireframes] Wireframes for this project can be located 
-
+![Wireframes] (static/images/readme_images/wireframes.png)<br>
 ## Database Diagram
 
 ![Database Diagrama](static/readme_images/models_relational_diagram.png)<br>
@@ -274,6 +286,33 @@ delete the following ones:
 * [Balsamiq](https://balsamiq.com/)<br>
    To build the wireframes for the project
 
+### Testing   
+
+* A combination of manual and automated testing has been used to ensure that the website's functionality meets the desired intent.
+
+   - W3C Markup Validation Service
+
+   ![W3c](static/images/readme_images/w3c_validation.png)
+
+   - https://pep8ci.herokuapp.com/
+
+   [PythonTests](static/images/python_testing)
+
+   - ![Lighthouse](static/images/readme_images/lighthouse_validation.png)
+    - Used to test the accessibility of the website.
+    
+### Automated Testing
+
+Coverage library has been used throughout testing to keep track how much of Python code was covered by the tests written. From running the coverage report the website has 83% of the code tested. The remaining code is covered by manual testing. 
+
+   ![AutomatedTest](static/images/readme_images/automated_testing.png)
+
+
+## Code Validation
+
+* All code has been validated using an online validator specific to the language; all code now passes with zero errors.
+
+
 ## Creating the Django app
 
 1. Go to the Code Institute Gitpod Full Template [Template](https://github.com/Code-Institute-Org/gitpod-full-template)
@@ -328,7 +367,7 @@ App
 
 * All photos that have been used in this project are of my son Theo Porras Tiderman  
 * The logo baby elephant was taken from www.vecteezy.com/free-vector/baby-elephant
-* 
+
 
 ### Information Sources / Resources
 
