@@ -107,7 +107,7 @@ All functionality and development of this project were managed using GitHub whic
 * For this project the colors are kept simple and comfortable for the users eyes. It's a babies a small children page, so soft 
 coloring seemed to be the right option. With a mat white and a happy green. 
 
-![Colors] (static/images/readme_images/color_palette.png)<br>
+![Colors](static/images/readme_images/color_palette.png)<br>
 
 #### Typography
 
@@ -115,7 +115,7 @@ coloring seemed to be the right option. With a mat white and a happy green.
 
 ### Wireframes
 
-![Wireframes] (static/images/readme_images/wireframes.png)<br>
+![Wireframes](static/images/readme_images/wireframes.png)<br>
 ## Database Diagram
 
 ![Database Diagrama](static/readme_images/models_relational_diagram.png)<br>
