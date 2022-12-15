@@ -1,9 +1,10 @@
+from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import CustomUser, Post, ParentProfile, GuestProfile, Profile, Comment
-from django.contrib.auth.forms import UserCreationForm
 
 
 class RegisterForm(UserCreationForm):
+
     class Meta:
         model = CustomUser
         fields = ["is_guest", "is_parent", "username", "email"]
@@ -55,7 +56,7 @@ class PostForm(forms.ModelForm):
                 # Almacenar el usuario
                 user = self.request.user
         if commit:
-            ### Almacenar el usuario en host
+            # Almacenar el usuario en host
             obj.author = user
             obj.save()
         return obj
@@ -79,7 +80,7 @@ class ParentForm(forms.ModelForm):
                 # Almacenar el usuario
                 user = self.request.user
         if commit:
-            ### Almacenar el usuario en host
+            # Almacenar el usuario en host
             obj.user = user
             obj.save()
         return obj
@@ -112,7 +113,7 @@ class ChildForm(forms.ModelForm):
                 # Almacenar el usuario
                 user = self.request.user
         if commit:
-            ### Almacenar el usuario en host
+            # Almacenar el usuario en host
             obj.user = user
             obj.save()
         return obj

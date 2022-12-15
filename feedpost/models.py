@@ -8,7 +8,6 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 
 
-
 class CustomUser(AbstractUser):
     is_parent = models.BooleanField(default=True)
     is_guest = models.BooleanField(default=False)
@@ -52,7 +51,8 @@ class Profile(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     profile_image = CloudinaryField("image", default="placeholder")
     birthdate = models.DateField()
-    friends = models.ManyToManyField(CustomUser, related_name="friends", blank=True)
+    friends = models.ManyToManyField(
+        CustomUser, related_name="friends", blank=True)
 
     def get_friends(self):
         return self.friends.all()
@@ -74,7 +74,8 @@ STATUS_CHOICES = (
 
 
 class Relationship(models.Model):
-    sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="sender")
+    sender = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="sender")
     receiver = models.ForeignKey(
         GuestProfile, on_delete=models.CASCADE, related_name="receiver"
     )
@@ -88,14 +89,16 @@ class Relationship(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=True)
+    author = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, default=True)
     slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField()
     featured_image = CloudinaryField("image", default="placeholder")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(CustomUser, related_name="likes", blank=True)
+    likes = models.ManyToManyField(
+        CustomUser, related_name="likes", blank=True)
 
     class Meta:
         verbose_name_plural = "Posts"
@@ -109,7 +112,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("post_detail")
-    
+
     def save(self, *args, **kwargs):
         if self.slug:
             if slugify(self.title) != self.slug:
@@ -120,7 +123,8 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name="comments")
     author = models.CharField(CustomUser, max_length=200, default="name")
     text = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
