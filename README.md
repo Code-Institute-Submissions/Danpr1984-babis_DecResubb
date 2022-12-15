@@ -42,6 +42,8 @@ was created with the purpose of bringing people together specifically of bringin
       - [Django Packages](#django-packages)
     - [Frameworks - Libraries - Programs Used](#frameworks---libraries---programs-used)
   - [Testing](#testing)  
+  - [Bugs](#bugs)
+  - [Unfixed-Bugs](#unfixed-bugs)
   - [Creating the Django app](#creating-the-django-app)
   - [Deployment of This Project](#deployment-of-this-project)
   - [Final Deployment](#final-deployment)
@@ -115,8 +117,14 @@ coloring seemed to be the right option. With a mat white and a happy green.
 
 ### Wireframes
 
+The very first design prototype was created using Balsamiq. I created a very basic wire frame which so I could visually understand where elements could sit and to also get a general feel of how the website would look before I had started to develop it. This is an extremely important part of the design process as it allows me to understand what I need to do to achieve the final end product. Spending a couple of hours doing this saves a lot of time in the development process and I will continue with this approach throughout any project I work on.
+
 ![Wireframes](static/images/readme_images/wireframes.png)<br>
+
 ## Database Diagram
+
+To create the database schema, I used an excellent graph modelling tool from Lucid Chart which shows the entire relationship between all models in the database. 
+
 
 ![Database Diagrama](static/readme_images/models_relational_diagram.png)<br>
 
@@ -197,7 +205,7 @@ be able to add children profiles but if the user is guest it would only be allow
 * On the Logout Page, users can confirm that they wish to exit the website.
 
 
-![Navbar]()
+![Navbar](static/images/readme_images/navbar.png)
 
 * The navigation bar is present at the top of every page and houses all links to the various other pages.
 * The options to Register or Log in will change to the option to log out once a user has logged in.
@@ -222,7 +230,8 @@ delete the following ones:
 4. Profiles
 6. Friends
 7. User
-   
+
+
 <br>
 
 ## Technologies Used
@@ -307,11 +316,23 @@ Coverage library has been used throughout testing to keep track how much of Pyth
 
    ![AutomatedTest](static/images/readme_images/automated_testing.png)
 
+   ![ManualTest](static/images/readme_images/crud_testing.png)
+
 
 ## Code Validation
 
 * All code has been validated using an online validator specific to the language; all code now passes with zero errors.
 
+## Bugs
+* I had issues with the automated testing. When trying to apply tests to CRUD functionality to test the views I had some issues, 
+therefore I did manual testing following Code Institute's tutors advice. 
+* I had some UX issues regarding a scroll bar popping up when clicking on the dropdown menu but I fixed it with a line fo style code. 
+* I has an issue with an image from the login page which I fixed copying the image from Cloudinary
+
+## Unfixed Bugs
+* I created a CustomUser table and had issues with the registration when asked if user is a parent or a guest. I will try to learn more about
+handling radio buttons, or check buttons to fix this. 
+* When user is in the login page and clicks on register button, there is a model popping up but is not the correct register form model. 
 
 ## Creating the Django app
 

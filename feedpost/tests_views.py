@@ -28,13 +28,13 @@ class TestViews(TestCase):
         self.assertTrue(log_in)
         self.assertTrue(self.user.is_parent)
 
-        # title = "test title"
-        # slug = "testslug"
-        # content = "testContent"
-        # self.post = Post.objects.create(
-        #     title=title, slug=slug, author=self.user, content=content
-        # )
-        # posts = Post.objects.all()
+        title = "test title"
+        slug = "testslug"
+        content = "testContent"
+        self.post = Post.objects.create(
+            title=title, slug=slug, author=self.user, content=content
+        )
+        posts = Post.objects.all()
 
     def test_landing_page(self):
 
@@ -69,9 +69,9 @@ class TestViews(TestCase):
     # def test_get_edit_item_page(self):
 
     #     post = Post.objects.create(title='Testing1234')
-    #     response = self.client.get(f'/post_detail/{post.slug}')
+    #     response = self.client.get(reverse('post_detail', args=[post.slug]))
     #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'post_detail')
+    #     self.assertTemplateUsed(response, 'post_detail.html')
 
     # def test_post_page(self):
     #     '''
