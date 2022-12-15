@@ -40,6 +40,7 @@ class PostForm(forms.ModelForm):
         exclude = (
             "author",
             "likes",
+            "slug",
         )
 
     def __init__(self, *args, **kwargs):

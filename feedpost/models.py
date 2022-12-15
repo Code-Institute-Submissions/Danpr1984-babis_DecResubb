@@ -5,6 +5,8 @@ from django.contrib.auth import get_user_model
 from cloudinary.models import CloudinaryField
 from datetime import datetime
 from django.dispatch import receiver
+from django.utils.text import slugify
+
 
 
 class CustomUser(AbstractUser):
@@ -86,7 +88,7 @@ class Relationship(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=True)
     slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField()
     featured_image = CloudinaryField("image", default="placeholder")
@@ -107,6 +109,14 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("post_detail")
+    
+    def save(self, *args, **kwargs):
+        if self.slug:
+            if slugify(self.title) != self.slug:
+                self.slug = slugify(self.title)
+        else:
+            self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):
