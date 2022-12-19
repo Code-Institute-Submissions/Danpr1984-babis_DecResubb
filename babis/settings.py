@@ -107,10 +107,10 @@ if 'DEVELOPMENT' in os.environ:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }}
 else:
-    DATABASES = {{
+    DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
         }
-    }
+    
 
 # DATABASES = {
 #     "default": {
